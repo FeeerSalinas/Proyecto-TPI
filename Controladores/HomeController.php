@@ -1,8 +1,6 @@
 <?php
 
-/*
-Este archivo se encarga de manejar las rutas del index al home
-*/
+
 
 if (isset($_REQUEST['Categoria']))
 {
