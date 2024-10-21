@@ -1,7 +1,7 @@
 <?php
     class ConnectionDB{
         //Atributos de conexión
-        private $host = "127.0.0.1:3307"; //Cambiar el puerto por localhost
+        private $host = "127.0.0.1:3306"; //Cambiar el puerto por localhost
         private $user = "root";
         private $pass = "";
         private $db = "freelanddb";

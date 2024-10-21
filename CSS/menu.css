@@ -1,0 +1,114 @@
+/* Estilo para el Botón de Menú */
+.btn-menu {
+    background-color: #007bff; /* Azul */
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    cursor: pointer;
+}
+
+.btn-menu:hover {
+    background-color: #00aaff;
+    transform: scale(1.1); /* Pequeño zoom al pasar el mouse */
+}
+
+/* Estilo del Navbar */
+.navbar {
+    background: linear-gradient(135deg, #00aaff, #007bff); /* Fondo igual al sidebar */
+    height: 60px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-brand {
+    font-size: 24px;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 18px;
+    margin-right: 15px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #d1e8ff;
+}
+
+/* Sidebar  */
+.vertical-menu {
+    width: 250px;
+    background: linear-gradient(135deg, #00aaff, #007bff);
+    position: fixed;
+    top: 60px; /* Debajo del navbar */
+    left: 0;
+    height: calc(100vh - 60px); /* Altura ajustada al espacio restante */
+    overflow-y: auto;
+    transition: margin-left 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+   
+}
+
+/* Estilo de los Enlaces del Sidebar */
+.vertical-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.vertical-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px); /* Desplazamiento ligero */
+}
+
+.vertical-menu i {
+    font-size: 22px;
+}
+
+/* Avatar con Sombra */
+.rounded-circle {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo del Contenido */
+.content {
+    margin-left: 250px; /* Espacio reservado para el sidebar */
+    padding: 20px;
+    margin-top: 60px;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+/* Footer Moderno */
+footer {
+    background-color: #00aaff;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* Responsive: Ocultar Sidebar en Pantallas Pequeñas */
+@media (max-width: 768px) {
+    .vertical-menu {
+        margin-left: -250px; /* Oculta el sidebar por defecto */
+    }
+
+    .content {
+        margin-left: 0; /* Ajusta el contenido si el sidebar está oculto */
+    }
+}
