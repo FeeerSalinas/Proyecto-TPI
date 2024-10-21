@@ -14,67 +14,71 @@
     />
 
     <style>
-        html, body {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            flex-direction: column;
-        }
+    html, body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
 
-        .navbar {
-            background-color: #00aaff; /* Celeste */
-        }
+    .navbar {
+        background-color: #00aaff; /*color celeste*/
+        height: 60px; /* Altura del navbar */
+    }
 
-        .navbar-nav .nav-link {
-            color: white !important;
-        }
+    .vertical-menu {
+        width: 250px;
+        background-color: #00aaff;
+        position: fixed;
+        top: 60px; /* Comienza debajo del navbar */
+        left: 0;
+        height: calc(100vh - 60px); /* Altura ajustada al espacio restante */
+        overflow-y: auto; /* Desplazamiento si el contenido es largo */
+        transition: margin-left 0.3s ease-in-out;
+    }
 
-        .navbar-nav .nav-link:hover {
-            background-color: #28a745; /* Verde */
-            border-radius: 5px;
-        }
+    .vertical-menu a {
+        color: white;
+        padding: 15px;
+        text-decoration: none;
+        display: block;
+    }
 
-        .navbar-brand img {
-            height: 40px;
-        }
+    .vertical-menu a:hover {
+        background-color: #28a745;
+        color: black;
+    }
 
-        .vertical-menu {
-            width: 250px;
-            height: 100vh;
-            background-color: #00aaff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding-top: 20px;
-            transition: margin-left 0.3s ease-in-out;
-        }
+    .content {
+        flex: 1;
+        margin-left: 250px;
+        padding: 20px;
+        margin-top: 60px; /* Ajusta el contenido después del navbar */
+        transition: margin-left 0.3s ease-in-out;
+    }
 
-        .vertical-menu a {
-            color: white;
-            padding: 15px;
-            text-decoration: none;
-            display: block;
-        }
+    footer {
+        background-color: black;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        width: 100%;
+    }
+    .btn-menu {
+        background-color: #00aaff; /* Fondo del botón */
+        color: white; /* Color del texto */
+        border: 2px solid #00aaff; /* Borde del mismo color */
+        border-radius: 8px; /* Esquinas redondeadas */
+        padding: 10px 20px;
+        transition: background-color 0.3s, border-color 0.3s;
+    }
 
-        .vertical-menu a:hover {
-            background-color: #28a745;
-            color: black;
-        }
+    .btn-menu:hover {
+        background-color: white; /* Fondo blanco al pasar el mouse */
+        color: #00aaff; /* Texto azul */
+        border-color: #00aaff; /* Borde azul */
+    }
+</style>
 
-        .content {
-            flex: 1;
-            margin-left: 250px;
-            padding: 20px;
-            transition: margin-left 0.3s ease-in-out;
-        }
-
-        footer {
-            background-color: black;
-            color: white;
-            text-align: center;
-            padding: 10px;
-            width: 100%;
-        }
-    </style>
 </head>
 <body>

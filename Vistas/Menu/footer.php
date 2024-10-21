@@ -3,7 +3,7 @@
     const content = document.getElementById('content');
     let sidebarVisible = true;
 
-    document.getElementById('sidebarToggle').addEventListener('click', () => {
+    document.getElementById('navbarToggle').addEventListener('click', () => {
         if (sidebarVisible) {
             sidebar.style.marginLeft = '-250px'; // Esconder sidebar
             content.style.marginLeft = '0'; // Ajustar contenido
