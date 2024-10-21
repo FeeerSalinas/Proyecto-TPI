@@ -7,7 +7,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <i class="fas fa-folder-plus"></i> Crear Proyectos
+                <i class="fas fa-folder-plus"></i> Buscar Proyectos
             </a>
         </li>
         <li class="nav-item">
@@ -17,7 +17,7 @@
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
-                <i class="fas fa-search"></i> Buscar Freelancer
+                <i class="fas fa-search"></i> Mis propuestas
             </a>
         </li>
         <li class="nav-item">
