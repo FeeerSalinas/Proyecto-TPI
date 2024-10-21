@@ -42,7 +42,7 @@
         }
 
         /*
-            Método para registrar un usuario como "Contratista"
+            Método para registrar un usuario
         */
         public function insertUsuario(string $nombre, string $correo, string $usuario, string $contrasenia, string $telefono, string $direccion, int $tipoUsuario){
             $this->nombre = $nombre;
@@ -68,6 +68,22 @@
             $this->idUsuario=$this->connectionDB->lastInsertId();
 
             return $this->idUsuario;
+        }
+
+        /** 
+         * Esta función verifica que no haya otro usuario registrado ya en la base de datos.
+         * @return int 1 si existe, false si no existe.
+        */
+        public function nombreUsuarioAlreadyExists(string $nombreUsuario){
+            $sql = "SELECT 1 FROM usuarios WHERE nombreUsuario = ?";
+            $queryParameters = array($nombreUsuario);
+            $query = $this->connectionDB->prepare($sql);
+            $query->execute($queryParameters);
+
+            //Convertir array asociativo, si no hay nada retorna false
+            $response = $query->fetch(PDO::FETCH_ASSOC);
+
+            return $response;
         }
     }
 ?>
