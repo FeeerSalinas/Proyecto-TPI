@@ -1,23 +1,34 @@
 <div id="sidebar" class="vertical-menu">
-    <h5 class="p-3">Menú Lateral</h5>
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">Dashboard</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Crear Proyectos</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-folder-plus"></i> Crear Proyectos
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Mis Proyectos</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-tasks"></i> Mis Proyectos
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Buscar Freelancer</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-search"></i> Buscar Freelancer
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Mi Perfil</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-user"></i> Mi Perfil
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Cerrar Sesión</a>
+            <a class="nav-link" href="#">
+                <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+            </a>
         </li>
     </ul>
 </div>
