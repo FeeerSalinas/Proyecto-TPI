@@ -8,7 +8,7 @@
 <div class="content" id="content">
     <main class="p-4">
         <h1>Esta es la vista del freelancer</h1>
-        <p>Aquí puedes gestionar tus proyectos y encontrar freelancers fácilmente.</p>
+        <p>Aquí puedes generar tus propuestas y encontrar proyectos fácilmente.</p>
     </main>
 </div>
 
