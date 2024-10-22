@@ -30,23 +30,6 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <!-- Barra lateral con categorías -->
-        <aside class="col-md-3 p-4 bg-light">
-            <h4>Filtrar por Categoría</h4>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a href="?nombre=<?= $nombre ?>">Todas las categorías</a>
-                </li>
-                <?php foreach ($categorias as $categoria): ?>
-                    <li class="list-group-item">
-                        <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
-                            <?= htmlspecialchars($categoria['nombre']) ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </aside>
-
         <!-- Contenido principal -->
         <div class="col-md-9 p-4">
             <h1 class="text-center mb-4">Buscar Freelancer</h1>
@@ -58,7 +41,7 @@
                         type="text" 
                         name="nombre" 
                         class="form-control" 
-                        placeholder="Buscar por nombre" 
+                        placeholder="Buscar Freelancer" 
                         value="<?= htmlspecialchars($nombre) ?>"
                     >
                     <button class="btn btn-primary" type="submit">Buscar</button>
@@ -96,6 +79,22 @@
                 <?php endif; ?>
             </div>
         </div>
+        <!-- Barra lateral con categorías al lado derecho -->
+        <aside class="col-md-2 p-4 bg-light position-fixed end-0" style="height: 100vh;">
+            <h5 class="text-center">Categorías</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-center">
+                    <a href="?nombre=<?= $nombre ?>">Todas</a>
+                </li>
+                <?php foreach ($categorias as $categoria): ?>
+                    <li class="list-group-item text-center">
+                        <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
+                            <?= htmlspecialchars($categoria['nombre']) ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </aside>
     </div>
 </div>
 

@@ -1,3 +1,9 @@
+/* Ajustar el contenedor para alinearlo más a la izquierda */
+.container-fluid {
+    padding-left: 350px; /* Mueve más a la izquierda */
+    padding-right: 100px; /* Espacio reservado para el sidebar derecho */
+    max-width: 100%; /* Reduce el ancho del contenedor */
+}
 /* Tarjeta de perfil */
 .profile-card {
     border: none;
