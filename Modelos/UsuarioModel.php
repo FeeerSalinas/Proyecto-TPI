@@ -101,5 +101,21 @@
             return false;
         }
 
+        public function obtenerPerfil($idUsuario) {
+            $sql = "SELECT nombre, tipoUsuario, telefono, direccion, descripcionPerfil, fotoPerfil 
+                    FROM usuarios 
+                    WHERE idUsuario = ?";
+            $query = $this->connectionDB->prepare($sql);
+            $query->execute([$idUsuario]);
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+        
+        public function actualizarDescripcion($idUsuario, $descripcion) {
+            $sql = "UPDATE usuarios SET descripcionPerfil = ? WHERE idUsuario = ?";
+            $query = $this->connectionDB->prepare($sql);
+            return $query->execute([$descripcion, $idUsuario]);
+        }
+        
+
     }
 ?>
