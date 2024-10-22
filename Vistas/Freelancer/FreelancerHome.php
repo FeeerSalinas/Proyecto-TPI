@@ -13,5 +13,5 @@
 </div>
 
 <?php
-    include '../Menu/footer.php';  // Footer con cierre del HTML
+    include '../Menu/footer.php';  // Footer 
 ?>

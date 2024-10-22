@@ -1,13 +1,13 @@
 <div id="sidebar" class="vertical-menu">
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="..\Contratista\ContratistaHome.php">
                 <i class="fas fa-home"></i> Dashboard
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
-                <i class="fas fa-folder-plus"></i> Buscar Freelances
+            <a class="nav-link" href="..\Contratista\BuscarFreelancer.php">
+                <i class="fas fa-folder-plus"></i> Buscar Freelancers
             </a>
         </li>
         <li class="nav-item">
