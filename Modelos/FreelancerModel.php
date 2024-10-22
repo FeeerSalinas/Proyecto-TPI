@@ -8,26 +8,13 @@ class FreelancerModel {
         $this->db = (new ConnectionDB())->getConnectionDB();
     }
 
-    public function obtenerCategorias() {
-        $sql = "SELECT * FROM categoria";
-        $stmt = $this->db->query($sql);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function obtenerFreelancers($nombre = '', $idCategoria = null) {
-        $sql = "SELECT idUsuario, nombre, descripcionPerfil, fotoPerfil 
+    public function obtenerFreelancers($nombre) {
+        $sql = "SELECT idUsuario, nombreUsuario, descripcionPerfil, fotoPerfil 
                 FROM usuarios 
-                WHERE tipoUsuario = 'Freelancer'
-                AND (:nombre = '' OR nombre LIKE :nombrePattern)
-                AND (:idCategoria IS NULL OR idCategoria = :idCategoria)";
+                WHERE tipoUsuario = 'Freelancer' AND nombreUsuario LIKE :nombre";
 
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([
-            'nombre' => $nombre,
-            'nombrePattern' => "%$nombre%",
-            'idCategoria' => $idCategoria
-        ]);
-
+        $stmt->execute(['nombre' => "%$nombre%"]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
