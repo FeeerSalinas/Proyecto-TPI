@@ -8,7 +8,11 @@ class FreelancerController {
         $this->freelancerModel = new FreelancerModel();
     }
 
-    public function buscarFreelancers($nombre = "") {
-        return $this->freelancerModel->obtenerFreelancers($nombre);
+    public function obtenerCategorias() {
+        return $this->freelancerModel->obtenerCategorias();
+    }
+
+    public function buscarFreelancers($nombre = "", $idCategoria = null) {
+        return $this->freelancerModel->obtenerFreelancers($nombre, $idCategoria);
     }
 }
