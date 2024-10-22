@@ -5,7 +5,7 @@
 
         <!-- Logo -->
         <a class="navbar-brand" href="#">
-            <img src="/Proyecto-TPI/IMG/logo.png" alt="Logo" height="40" class="logo-spacing">
+            <img src="../../IMG/logo.png" alt="Logo" height="40" class="logo-spacing">
         </a>
 
         <div class="collapse navbar-collapse" id="navbarNav">

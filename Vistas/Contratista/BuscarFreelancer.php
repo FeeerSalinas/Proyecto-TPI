@@ -1,8 +1,9 @@
 <?php
-    include '../Menu/header.php';  
-    include '../Menu/navbarContratista.php';  
-    include '../Menu/sidebarContratista.php';  
-
+    include '../Menu/header.php';   // Header con estilos
+    include '../Menu/navbarContratista.php';   // Navbar superior
+    include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
+?>
+<?php
     require_once '../../Controladores/FreelancerController.php';
     $controller = new FreelancerController();
 
@@ -25,7 +26,7 @@
         rel="stylesheet"
         crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="/Proyecto-TPI/CSS/freelancer.css">
+<link rel="stylesheet" href="../../CSS/freelancer.css">    
 </head>
 <body>
 <div class="container-fluid">
@@ -80,7 +81,7 @@
             </div>
         </div>
         <!-- Barra lateral con categorías al lado derecho -->
-        <aside class="col-md-2 p-4 bg-light position-fixed end-0" style="height: 100vh;">
+        <aside class="col-md-2 p-3 bg-light position-fixed end-0" style="height: 100vh;">
             <h5 class="text-center">Categorías</h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-center">
@@ -98,6 +99,6 @@
     </div>
 </div>
 
-<?php include '../Menu/footer.php'; ?>
+<?php include '../Menu/footerContratista.php'; ?>
 </body>
 </html>
