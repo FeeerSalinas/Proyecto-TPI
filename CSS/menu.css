@@ -112,3 +112,39 @@ footer {
         margin-left: 0; /* Ajusta el contenido si el sidebar está oculto */
     }
 }
+/* Ajuste del avatar de usuario */
+.perfil-img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border: 2px solid #007bff;
+}
+
+/* Estilo del nombre de usuario */
+.nombre-usuario {
+    font-size: 14px;
+    color: white;
+}
+
+/* Estilo del menú desplegable */
+.dropdown-menu {
+    min-width: 150px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de menú */
+.btn-menu {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 15px;
+    transition: background-color 0.3s ease, transform 0.2s;
+    cursor: pointer;
+}
+
+.btn-menu:hover {
+    background-color: #00aaff;
+    transform: scale(1.1);
+}
