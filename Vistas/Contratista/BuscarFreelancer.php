@@ -1,4 +1,14 @@
 <?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");  // Redirigir si no hay sesión activa
+    exit();
+}
+?>
+
+<?php
     include '../Menu/header.php';   // Header con estilos
     include '../Menu/navbarContratista.php';   // Navbar superior
     include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
@@ -32,7 +42,7 @@
 <div class="container-fluid">
     <div class="row">
         <!-- Contenido principal -->
-        <div class="col-md-9 p-4">
+        <div class="col-md-9 p-5">
             <h1 class="text-center mb-4">Buscar Freelancer</h1>
 
             <!-- Formulario de búsqueda -->
@@ -99,6 +109,6 @@
     </div>
 </div>
 
-<?php include '../Menu/footerContratista.php'; ?>
+<?php include '../Menu/footer.php'; ?>
 </body>
 </html>
