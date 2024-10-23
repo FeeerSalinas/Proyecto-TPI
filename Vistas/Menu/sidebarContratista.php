@@ -16,7 +16,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="../Contratista/MisProyectos.php">
                 <i class="fas fa-search"></i> Mis Proyectos
             </a>
         </li>
