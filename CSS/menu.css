@@ -112,3 +112,11 @@ footer {
         margin-left: 0; /* Ajusta el contenido si el sidebar está oculto */
     }
 }
+.navbar .d-flex img {
+    border: 2px solid #007bff;
+}
+
+.navbar .d-flex span {
+    font-size: 14px;
+    color: white;
+}
