@@ -1,0 +1,90 @@
+/* Ajustar el contenedor para alinearlo más a la izquierda */
+.container-fluid {
+    padding-left: 300px; /* Mueve más a la izquierda */
+    padding-right: 10px; /* Espacio reservado para el sidebar derecho */
+    max-width: 90%; /* Reduce el ancho del contenedor */
+}
+/* Tarjeta de perfil */
+.profile-card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.2s, box-shadow 0.3s;
+    width: 100%;                /* Ancho completo de la columna */
+    max-width: 350px;           /* Ancho máximo consistente */
+    height: 320px;              /* Altura fija */
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;         /* Necesario para posicionar elementos hijos absolutamente */
+    overflow: hidden;
+}
+
+.profile-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen de perfil circular */
+.profile-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 3px solid #007bff;
+    margin-top: 10px;
+}
+
+/* Estilo del nombre y descripción del perfil */
+.profile-card h5 {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.profile-card p {
+    font-size: 14px;
+    text-align: center;
+    color: #6c757d;
+    padding: 10px;
+    margin: 0;
+    height: 80px;               /* Limita la altura de la descripción */
+    overflow: hidden;           /* Oculta texto adicional */
+}
+
+/* Botón Ver Perfil */
+.btn-outline-primary {
+    position: absolute;          /* Posiciona el botón dentro de la tarjeta */
+    bottom: 10px;                /* Fija el botón en la parte inferior */
+    left: 50%;
+    transform: translateX(-50%); /* Centra el botón horizontalmente */
+    border-radius: 50px;
+    width: 80%;                  /* Ancho del botón consistente */
+    max-width: 200px;
+    padding: 10px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.btn-outline-primary:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Contenedor del contenido */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    margin-top: 60px;
+    transition: margin-left 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* Distribución responsiva */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+    }
+}
