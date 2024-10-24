@@ -12,6 +12,18 @@ if (!isset($_SESSION['idUsuario']) || $_SESSION['tipoUsuario'] !== 'freelancer')
     exit();
 }
 
+//Obtener el id del proyecto a contratar
+$idProyecto = 0;
+
+if (isset($_GET['idProyecto'])) {
+    $idProyecto = $_GET['idProyecto'];
+}else{
+    echo "No hay id del proyecto";
+    exit();
+}
+
+echo($idProyecto);
+
 $idFreelancer = $_SESSION['idUsuario'];
 $conexion = new ConnectionDB();
 $conn = $conexion->getConnectionDB();

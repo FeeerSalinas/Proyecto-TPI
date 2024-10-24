@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['idUsuario'])) {
     // Si el usuario ya ha iniciado sesión, redirigir a la página correspondiente
-    header("Location: " . ($_SESSION['tipoUsuario'] == 'freelancer' ? 'FreelancerHome.php' : 'ContratistaHome.php'));
+    header("Location: " . ($_SESSION['tipoUsuario'] == 'freelancer' ? './Freelancer/FreelancerHome.php' : './Contratista/ContratistaHome.php'));
     exit();
 }
 ?>

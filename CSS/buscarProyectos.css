@@ -1,0 +1,45 @@
+body{
+    font-size: 15px;
+}
+
+h1 {
+    color: #22C55E;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-weight: bold; /* Negrita para destacar más */
+    text-align: center;
+    align-items: center;
+}
+
+h4 {
+    text-align: center; 
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.card{
+    width: 97%;
+    border: 1px solid #D1D5DB;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background-color: white;
+}
+
+#propuesta {
+    width: 20%; 
+    padding: 10px;
+    background-color: #22C55E;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 200;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-content-end {
+    justify-content: flex-end;
+}
