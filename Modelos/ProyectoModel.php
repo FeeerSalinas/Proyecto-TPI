@@ -37,5 +37,42 @@
             $resultado = $execute->fetchall(PDO::FETCH_ASSOC);
             return $resultado;
         }
+
+        public function getProyectoByIdProyecto(int $idProyecto)
+        {
+            $sql = "SELECT * FROM proyectos WHERE idProyecto = ? LIMIT 1";
+
+            $execute = $this->connectionDB->prepare($sql);
+            $queryParameters = array(
+                $this->$idProyecto
+            );
+            $execute->execute($queryParameters);
+            $resultado = $execute->fetch(PDO::FETCH_ASSOC);
+            return $resultado;
+        }
+
+        public function getProyectosByIdCategoria(int $idCategoria){
+            $sql = "SELECT p.idProyecto, p.titulo, p.presupuesto, p.fechaPublicación, c.nombre AS nombreCategoria, u.nombre AS nombreUsuario FROM 
+            proyectos AS p
+            JOIN categoria AS c ON p.idCategoria = c.idCategoria
+            JOIN usuarios AS u ON p.idContratista = u.idUsuario
+            WHERE c.idCategoria = ?";
+
+            $execute = $this->connectionDB->prepare($sql);
+            
+            $execute->execute([$idCategoria]);
+            
+            $resultado = $execute->fetchAll(PDO::FETCH_ASSOC);
+            return $resultado;
+        }
+
+        public function getAllCategorias()
+        {
+            $sql = "SELECT * FROM categoria";
+
+            $execute = $this->connectionDB->query($sql);
+            $resultado = $execute->fetchall(PDO::FETCH_ASSOC);
+            return $resultado;
+        }
     }
 ?>

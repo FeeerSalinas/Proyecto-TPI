@@ -18,6 +18,21 @@
 
             return $this->ObjProyectoModel->getAllProyectos();
         }
+
+        public function getProyectoByIdProyecto(int $idProyecto){
+
+            //Obtener todos los proyectos
+
+            return $this->ObjProyectoModel->getProyectoByIdProyecto($idProyecto);
+        }
+
+        public function getProyectosByIdCategoria(int $idCategoria){
+            return $this->ObjProyectoModel->getProyectosByIdCategoria($idCategoria);
+        }
+
+        public function getAllCategorias(){
+            return $this->ObjProyectoModel->getAllCategorias();
+        }
     }
 
 ?>
