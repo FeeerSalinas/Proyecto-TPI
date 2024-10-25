@@ -74,7 +74,10 @@ if (!isset($_SESSION['idUsuario'])) {
                                     <p class="card-text text-muted">
                                         <?= htmlspecialchars(substr($freelancer['descripcionPerfil'], 0, 60)) ?>...
                                     </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">Ver Perfil</a>
+                                    <a href="perfilFreelancer.php?id=<?= $freelancer['idUsuario'] ?>" class="btn btn-outline-primary btn-sm">
+                                        Ver Perfil
+                                    </a>
+
                                 </div>
                             </div>
                         </div>

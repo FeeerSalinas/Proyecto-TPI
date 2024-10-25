@@ -15,4 +15,8 @@ class FreelancerController {
     public function buscarFreelancers($nombre, $idCategoria) {
         return $this->freelancerModel->obtenerFreelancers($nombre, $idCategoria);
     }
+    public function obtenerFreelancerPorId($id) {
+        return $this->freelancerModel->obtenerPorId($id);  
+    }
+    
 }
