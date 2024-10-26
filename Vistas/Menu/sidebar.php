@@ -21,7 +21,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="../Freelancer/perfilFreelancer.php">
                 <i class="fas fa-user"></i> Mi Perfil
             </a>
         </li>

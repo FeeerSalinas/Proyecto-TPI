@@ -13,7 +13,7 @@
                 <li class="nav-item"><a class="nav-link" href="#">Buscar Proyectos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Mis Proyectos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Mis propuestas</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Mi Perfil</a></li>
+                <li class="nav-item"><a class="nav-link" href="../Freelancer/perfilFreelancer.php">Mi Perfil</a></li>
             </ul>
 
             <!-- Avatar de Usuario -->
