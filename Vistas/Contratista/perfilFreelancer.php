@@ -72,6 +72,11 @@ if (!$freelancer) {
                         <a href="BuscarFreelancer.php" class="btn btn-secondary px-4 py-2">
                             <i class="fas fa-arrow-left"></i> Regresar
                         </a>
+                        <!-- Botón de Contratar -->
+                        <a href="contratarFreelancer.php?id=<?= $freelancer['idUsuario'] ?>" 
+                           class="btn btn-primary px-4 py-2">
+                            <i class="fas fa-briefcase"></i> Contratar
+                        </a>
                     </div>
                 </div>
             </div>
