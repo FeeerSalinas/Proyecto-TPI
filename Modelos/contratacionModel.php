@@ -8,12 +8,23 @@ class ContratacionModel {
         $this->db = (new ConnectionDB())->getConnectionDB();
     }
 
-    public function crearContratacion($idFreelancer, $idContratista, $titulo, $descripcion, $metodo, $fechaInicio, $fechaFin) {
-        $sql = "INSERT INTO contrataciones (idFreelancer, idContratista, titulo, descripcion, metodo, fechaInicio, fechaFin, estado) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, 'Pendiente')";
-
+    public function crearServicio($idFreelancer, $titulo, $descripcion, $idCategoria) {
+        $sql = "INSERT INTO servicios (idFreelancer, titulo, descripcion, idCategoria, estado) 
+                VALUES (?, ?, ?, ?, 'Activo')";
         $stmt = $this->db->prepare($sql);
-        return $stmt->execute([$idFreelancer, $idContratista, $titulo, $descripcion, $metodo, $fechaInicio, $fechaFin]);
+
+        if ($stmt->execute([$idFreelancer, $titulo, $descripcion, $idCategoria])) {
+            return $this->db->lastInsertId();
+        }
+        return false;
+    }
+
+    public function crearContratacion($idServicio, $idFreelancer, $idContratista, $metodo, $fechaInicio, $fechaFin, $pago) {
+        $sql = "INSERT INTO contrataciones (idServicio, idFreelancer, idContratista, metodo, fechaInicio, fechaFin, estado, pago) 
+                VALUES (?, ?, ?, ?, ?, ?, 'Pendiente', ?)";
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([$idServicio, $idFreelancer, $idContratista, $metodo, $fechaInicio, $fechaFin, $pago]);
     }
 }
 ?>

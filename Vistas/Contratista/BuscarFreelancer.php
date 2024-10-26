@@ -88,21 +88,29 @@ if (!isset($_SESSION['idUsuario'])) {
             </div>
         </div>
         <!-- Barra lateral con categorías al lado derecho -->
-        <aside class="col-md-2 p-3 bg-light position-fixed end-0" style="height: 100vh;">
-            <h5 class="text-center">Categorías</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">
-                    <a href="?nombre=<?= $nombre ?>">Todas</a>
-                </li>
-                <?php foreach ($categorias as $categoria): ?>
-                    <li class="list-group-item text-center">
-                        <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
-                            <?= htmlspecialchars($categoria['nombre']) ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </aside>
+<aside class="col-md-2 p-3 bg-light position-fixed end-0" style="height: 100vh;">
+    <!-- Botón para Freelancers Contratados -->
+    <div class="d-grid gap-2 mb-4">
+        <a href="../Contratista/freelancersContratados.php" class="btn btn-primary btn-lg">
+            Freelancers Contratados
+        </a>
+    </div>
+
+    <h5 class="text-center">Categorías</h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-center">
+            <a href="?nombre=<?= $nombre ?>">Todas</a>
+        </li>
+        <?php foreach ($categorias as $categoria): ?>
+            <li class="list-group-item text-center">
+                <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
+                    <?= htmlspecialchars($categoria['nombre']) ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</aside>
+
     </div>
 </div>
 

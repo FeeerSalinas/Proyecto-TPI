@@ -9,22 +9,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $metodo = $_POST['metodo'];
     $fechaInicio = $_POST['fechaInicio'];
     $fechaFin = $_POST['fechaFin'];
+    $pago = $_POST['pago'];
 
     $contratacionModel = new ContratacionModel();
-    $resultado = $contratacionModel->crearContratacion(
-        $idFreelancer,
-        $idContratista,
-        $titulo,
-        $descripcion,
-        $metodo,
-        $fechaInicio,
-        $fechaFin
-    );
+    $idServicio = $contratacionModel->crearServicio($idFreelancer, $titulo, $descripcion, $_POST['idCategoria']);
 
-    if ($resultado) {
-        header("Location: ../Vistas/Contratista/ContratistaHome.php?mensaje=contratacion_exitosa");
-    } else {
-        echo "Error al procesar la contratación.";
+    if ($idServicio) {
+        $resultado = $contratacionModel->crearContratacion($idServicio, $idFreelancer, $idContratista, $metodo, $fechaInicio, $fechaFin, $pago);
+        if ($resultado) {
+            header("Location: ../Vistas/Contratista/freelancersContratados.php?mensaje=contratacion_exitosa");
+            exit();
+        }
     }
+    echo "Error al procesar la contratación.";
 }
 ?>
