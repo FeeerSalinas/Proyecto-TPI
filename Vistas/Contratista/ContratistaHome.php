@@ -16,7 +16,7 @@ if (!isset($_SESSION['idUsuario'])) {
 <!-- Contenedor principal -->
 <div class="content" id="content">
     <main class="p-4">
-        <h1>Esta es la vista del freelancer</h1>
+        <h1>Esta es la vista del Contratista</h1>
         <p>Aquí puedes gestionar tus proyectos y encontrar freelancers fácilmente.</p>
     </main>
 </div>
