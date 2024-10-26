@@ -1,7 +1,7 @@
 <?php
-    include '../Menu/header.php';   // Header con estilos
-    include '../Menu/navbar.php';   // Navbar superior
-    include '../Menu/sidebar.php';  // Sidebar izquierdo
+include '../Menu/header.php';   // Header con estilos
+include '../Menu/sidebarFreelancer.php';   // Navbar superior
+include '../Menu/navbarFreelancer.php';  // Sidebar izquierdo
 ?>
 
 <!-- Contenedor principal -->

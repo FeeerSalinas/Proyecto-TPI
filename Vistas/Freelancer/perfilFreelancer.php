@@ -1,8 +1,8 @@
 <?php
     require_once("../../Modelos/UsuarioModel.php");
     include '../Menu/header.php';   // Header con estilos
-    include '../Menu/navbar.php';   // Navbar superior
-    include '../Menu/sidebar.php';  // Sidebar izquierdo
+    include '../Menu/sidebarFreelancer.php';   // Navbar superior
+    include '../Menu/navbarFreelancer.php';  // Sidebar izquierdo
 
     // Iniciar sesión y verificar usuario
     session_start();
