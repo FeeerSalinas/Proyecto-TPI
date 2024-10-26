@@ -26,7 +26,36 @@
             $this->connectionDB=$this->connectionDB->getConnectionDB();
         }
 
-        // ... [Mantener los métodos existentes] ...
+        public function login($nombreUsuario, $clave) {
+            // Primero, obtenemos el usuario por nombre de usuario
+            $sql = "SELECT * FROM usuarios WHERE nombreUsuario = ?";
+            $query = $this->connectionDB->prepare($sql);
+            $query->execute([$nombreUsuario]);
+            
+            $usuario = $query->fetch(PDO::FETCH_ASSOC);
+            
+            if ($usuario) {
+                // Verificamos si la contraseña encriptada coincide
+                if ($usuario['clave'] === md5($clave)) {
+                    // Inicio de sesión exitoso
+                    session_start();
+                    $_SESSION['idUsuario'] = $usuario['idUsuario'];
+                    $_SESSION['nombreUsuario'] = $usuario['nombreUsuario'];
+                    $_SESSION['tipoUsuario'] = $usuario['tipoUsuario'];
+                    
+                    // Redirigir según el tipo de usuario
+                    if ($usuario['tipoUsuario'] == 'freelancer') {
+                        header("Location: Freelancer/FreelancerHome.php");
+                    } else {
+                        header("Location: Contratista/ContratistaHome.php");
+                    }
+                    exit();
+                }
+            }
+            
+            // Si llegamos aquí, el inicio de sesión ha fallado
+            return false;
+        }
 
         public function obtenerPerfil($idUsuario) {
             $sql = "SELECT u.nombre, u.tipoUsuario, u.telefono, u.direccion, 
