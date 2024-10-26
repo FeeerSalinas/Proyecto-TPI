@@ -11,17 +11,17 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="CrearProyecto.php">
                 <i class="fas fa-tasks"></i> Crear Proyecto
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="../Contratista/MisProyectos.php">
                 <i class="fas fa-search"></i> Mis Proyectos
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="../Contratista/perfilContratista.php">
                 <i class="fas fa-user"></i> Mi Perfil
             </a>
         </li>
