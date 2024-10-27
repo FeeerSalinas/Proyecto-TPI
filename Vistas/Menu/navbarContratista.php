@@ -1,4 +1,25 @@
 
+<head>
+    <style>
+        /* Asegura que la imagen del navbar tenga tamaño controlado */
+        .navbar-brand img {
+            height: 40px;   /* Tamaño fijo */
+            width: auto;    /* Mantener proporción */
+            max-width: 100%; /* Prevenir que se agrande más del contenedor */
+        }
+
+        /* Ajustar márgenes para evitar exceso de espacio */
+        .navbar-brand {
+            padding: 0;
+            margin-right: 10px; /* Ajustar espaciado a la derecha */
+        }
+
+        /* Estilos para evitar que la imagen se desborde */
+        .navbar {
+            overflow: hidden;
+        }
+    </style>
+</head>
 <nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
     <div class="container-fluid">
         <!-- Botón de Menú con Estilo Personalizado -->

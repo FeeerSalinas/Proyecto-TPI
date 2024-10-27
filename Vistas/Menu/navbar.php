@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
     <div class="container-fluid">
         <!-- Botón de Menú con Estilo Personalizado -->
         <button class="btn btn-menu me-3" id="navbarToggle">☰</button>
