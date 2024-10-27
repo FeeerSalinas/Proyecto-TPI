@@ -1,8 +1,15 @@
 <?php
+
+include '../Menu/header.php';   // Header con estilos
+include '../Menu/sidebarFreelancer.php';   // Navbar superior
+include '../Menu/navbarFreelancer.php';  // Sidebar izquierdo
+?>
+
     require_once("../../Modelos/UsuarioModel.php");
     include '../Menu/header.php';   
     include '../Menu/navbar.php';   
     include '../Menu/sidebar.php'; 
+
 
     // Iniciar sesión y verificar usuario
     session_start();
