@@ -189,3 +189,90 @@ function actualizarEstadoPropuesta(idPropuesta, estado) {
         showNotification(error.message, 'error');
     });
 }
+
+function generarContrato(idPropuesta, idProyecto, idFreelancer) {
+    // Obtener la fecha actual
+    const fechaActual = new Date().toISOString().split('T')[0];
+    
+    // Crear el modal
+    const modalHTML = `
+        <div class="modal fade" id="contratoModal" tabindex="-1" role="dialog" aria-labelledby="contratoModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="contratoModalLabel">Generar Contrato</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="contratoForm">
+                            <input type="hidden" name="idPropuesta" value="${idPropuesta}">
+                            <input type="hidden" name="idProyecto" value="${idProyecto}">
+                            <input type="hidden" name="idFreelancer" value="${idFreelancer}">
+                            
+                            <div class="form-group">
+                                <label for="fechaInicio">Fecha de Inicio:</label>
+                                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" 
+                                       value="${fechaActual}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="fechaFin">Fecha de Finalización:</label>
+                                <input type="date" class="form-control" id="fechaFin" name="fechaFin" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="metodo">Método de Trabajo:</label>
+                                <select class="form-control" id="metodo" name="metodo" required>
+                                    <option value="remoto">Remoto</option>
+                                    <option value="presencial">Presencial</option>
+                                    <option value="hibrido">Híbrido</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="guardarContrato()">Guardar Contrato</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    // Agregar el modal al body
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    
+    // Mostrar el modal
+    $('#contratoModal').modal('show');
+    
+    // Limpiar el modal cuando se cierre
+    $('#contratoModal').on('hidden.bs.modal', function () {
+        $(this).remove();
+    });
+}
+
+function guardarContrato() {
+    const formData = new FormData(document.getElementById('contratoForm'));
+    
+    fetch('../Contratista/guardarContrato.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Contrato generado exitosamente');
+            $('#contratoModal').modal('hide');
+            // Recargar la página para mostrar el botón de PayPal
+            location.reload();
+        } else {
+            alert('Error al generar el contrato: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Error al procesar la solicitud');
+    });
+}

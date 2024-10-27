@@ -39,9 +39,6 @@
     } catch(PDOException $e) {
         die("Error en la consulta: " . $e->getMessage());
     }
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -50,6 +47,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Proyectos</title>
+    
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../../CSS/misProyectos.css">
 </head>
 <body>
@@ -134,26 +136,31 @@
                                                     $stmtContratacion->execute();
                                                     $contratacion = $stmtContratacion->fetch(PDO::FETCH_ASSOC);
                                                     
-                                                    if ($contratacion && (!isset($contratacion['estado_pago']) || $contratacion['estado_pago'] != 'completado')): ?>
-                                                       <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                                                    if (!$contratacion): ?>
+                                                        <button class="btn btn-primary btn-sm"
+                                                                onclick="generarContrato(<?php echo $propuesta['idPropuesta']; ?>, 
+                                                                                      <?php echo $proyecto['idProyecto']; ?>, 
+                                                                                      <?php echo $propuesta['idFreelancer']; ?>)">
+                                                            Generar Contrato
+                                                        </button>
+                                                    <?php elseif (!isset($contratacion['estado_pago']) || $contratacion['estado_pago'] != 'completado'): ?>
+                                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                                                             <input type="hidden" name="cmd" value="_xclick">
                                                             <input type="hidden" name="business" value="sb-15k4m33627051@business.example.com">
                                                             <input type="hidden" name="item_name" value="Pago por proyecto: <?php echo htmlspecialchars($proyecto['titulo']); ?>">
                                                             <input type="hidden" name="amount" value="<?php echo $contratacion['pago']; ?>">
                                                             <input type="hidden" name="currency_code" value="USD">
-                                                            <!-- Asegúrate de usar URLs absolutas con HTTPS -->
                                                             <input type="hidden" name="return" value="http://localhost/ProyectoTPI/Views/Contratista/confirmarPagoPaypal.php?idContratacion=<?php echo $contratacion['idContrato']; ?>">
                                                             <input type="hidden" name="cancel_return" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/misProyectos.php">
                                                             <input type="hidden" name="notify_url" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/ipn_handler.php">
                                                             <input type="hidden" name="custom" value="<?php echo $contratacion['idContrato']; ?>">
-                                                            <!-- Campos adicionales para Sandbox -->
                                                             <input type="hidden" name="test_ipn" value="1">
                                                             <input type="hidden" name="sandbox" value="1">
                                                             <button type="submit" class="btn btn-primary btn-sm">
                                                                 <i class="fab fa-paypal"></i> Pagar $<?php echo number_format($contratacion['pago'], 2); ?> (Sandbox)
                                                             </button>
                                                         </form>
-                                                    <?php elseif (isset($contratacion['estado_pago']) && $contratacion['estado_pago'] == 'completado'): ?>
+                                                    <?php else: ?>
                                                         <span class="badge badge-success">Pago completado</span>
                                                     <?php endif; ?>
                                                 <?php endif; ?>
@@ -175,6 +182,11 @@
         </div>
     </div>
 
+   
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   
     <script src="../../JS/misProyectos.js"></script>
 </body>
 </html>
