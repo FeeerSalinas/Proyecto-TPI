@@ -55,7 +55,6 @@
             // Si llegamos aquí, el inicio de sesión ha fallado
             return false;
         }
-        // ... [Mantener los métodos existentes] ...
 
         public function obtenerPerfil($idUsuario) {
             $sql = "SELECT u.nombre, u.tipoUsuario, u.telefono, u.direccion, 
