@@ -11,11 +11,10 @@
         private $clave;
         private $telefono;
         private $direccion;
-
         private $tipoUsuario;
         private $descripcionPerfil;
         private $fotoPerfil;
-
+        private $idCategoria;
 
         //Variable para conexión
         private $connectionDB;
@@ -26,50 +25,6 @@
             $this->connectionDB=new ConnectionDB();
             $this->connectionDB=$this->connectionDB->getConnectionDB();
         }
-
-        /*
-            Método para asignar el rol a un usuario
-        */
-        function designRole(int $tipoUsuario){
-            switch ($tipoUsuario) {
-                case 1:
-                    $this->tipoUsuario = "freelancer";
-                    break;
-                default:
-                    $this->tipoUsuario = "contratista";
-                    break;
-            }
-        }
-
-        /*
-            Método para registrar un usuario como "Contratista"
-        */
-        public function insertUsuario(string $nombre, string $correo, string $usuario, string $contrasenia, string $telefono, string $direccion, int $tipoUsuario){
-            $this->nombre = $nombre;
-            $this->correo = $correo;
-            $this->nombreUsuario = $usuario;
-            $this->clave = $contrasenia;
-            $this->telefono = $telefono;
-            $this->direccion = $direccion;
-
-            //0 --> Contratista, 1 --> Freelancer
-            $this->designRole($tipoUsuario);
-
-            $sql="INSERT INTO usuarios (nombre, correo, clave, tipoUsuario, telefono, direccion, nombreUsuario)
-            VALUES(?,?,?,?,?,?,?)";
-
-            $insert=$this->connectionDB->prepare($sql);
-            $queryParameters = array(
-                $this->nombre, $this->correo, $this->clave, $this->tipoUsuario, $this->telefono, $this->direccion, $this->nombreUsuario
-            );
-
-            $insertResult = $insert->execute($queryParameters);
-
-            $this->idUsuario=$this->connectionDB->lastInsertId();
-
-            return $this->idUsuario;
-        }
-
         public function login($nombreUsuario, $clave) {
             // Primero, obtenemos el usuario por nombre de usuario
             $sql = "SELECT * FROM usuarios WHERE nombreUsuario = ?";
@@ -100,6 +55,69 @@
             // Si llegamos aquí, el inicio de sesión ha fallado
             return false;
         }
+        // ... [Mantener los métodos existentes] ...
 
+        public function obtenerPerfil($idUsuario) {
+            $sql = "SELECT u.nombre, u.tipoUsuario, u.telefono, u.direccion, 
+                           u.descripcionPerfil, u.fotoPerfil, u.idCategoria,
+                           c.nombre as nombreCategoria
+                    FROM usuarios u 
+                    LEFT JOIN categoria c ON u.idCategoria = c.idCategoria 
+                    WHERE u.idUsuario = ?";
+            $query = $this->connectionDB->prepare($sql);
+            $query->execute([$idUsuario]);
+            return $query->fetch(PDO::FETCH_ASSOC);
+        }
+
+        public function actualizarDescripcion($idUsuario, $descripcion) {
+            $sql = "UPDATE usuarios SET descripcionPerfil = ? WHERE idUsuario = ?";
+            $query = $this->connectionDB->prepare($sql);
+            return $query->execute([$descripcion, $idUsuario]);
+        }
+
+        // Nuevos métodos para manejar categorías
+        public function obtenerCategorias() {
+            try {
+                $sql = "SELECT idCategoria, nombre FROM categoria ORDER BY nombre";
+                $query = $this->connectionDB->prepare($sql);
+                $query->execute();
+                return $query->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                return [];
+            }
+        }
+
+        public function actualizarCategoria($idUsuario, $idCategoria) {
+            try {
+                $sql = "UPDATE usuarios SET idCategoria = ? WHERE idUsuario = ?";
+                $query = $this->connectionDB->prepare($sql);
+                return $query->execute([$idCategoria, $idUsuario]);
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
+
+        // Método combinado para actualizar descripción y categoría
+        public function actualizarPerfilFreelancer($idUsuario, $descripcion, $idCategoria) {
+            try {
+                $this->connectionDB->beginTransaction();
+
+                // Actualizar descripción
+                $sqlDesc = "UPDATE usuarios SET descripcionPerfil = ? WHERE idUsuario = ?";
+                $queryDesc = $this->connectionDB->prepare($sqlDesc);
+                $queryDesc->execute([$descripcion, $idUsuario]);
+
+                // Actualizar categoría
+                $sqlCat = "UPDATE usuarios SET idCategoria = ? WHERE idUsuario = ?";
+                $queryCat = $this->connectionDB->prepare($sqlCat);
+                $queryCat->execute([$idCategoria, $idUsuario]);
+
+                $this->connectionDB->commit();
+                return true;
+            } catch (PDOException $e) {
+                $this->connectionDB->rollBack();
+                return false;
+            }
+        }
     }
 ?>
