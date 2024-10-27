@@ -25,7 +25,6 @@
             $this->connectionDB=new ConnectionDB();
             $this->connectionDB=$this->connectionDB->getConnectionDB();
         }
-
         public function login($nombreUsuario, $clave) {
             // Primero, obtenemos el usuario por nombre de usuario
             $sql = "SELECT * FROM usuarios WHERE nombreUsuario = ?";

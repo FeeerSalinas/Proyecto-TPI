@@ -1,8 +1,8 @@
 <?php
     require_once("../../Modelos/UsuarioModel.php");
     include '../Menu/header.php';   
-    include '../Menu/navbarContratista.php';   
-    include '../Menu/sidebarContratista.php'; 
+    include '../Menu/navbar.php';   
+    include '../Menu/sidebar.php'; 
 
     // Iniciar sesión y verificar usuario
     session_start();

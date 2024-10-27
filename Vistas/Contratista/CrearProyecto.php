@@ -1,4 +1,12 @@
 <?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");  // Redirigir si no hay sesión activa
+    exit();
+}
+
     include '../Menu/header.php';   // Header con estilos
     include '../Menu/navbarContratista.php';   // Navbar superior
     include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
@@ -24,8 +32,6 @@
     }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,7 +89,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="../../JS/errorCrearProyecto.js"></script>
 </body>
-</html>
 
 <?php
     include '../Menu/footer.php';
