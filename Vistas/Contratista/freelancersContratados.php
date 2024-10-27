@@ -66,7 +66,7 @@ try {
                             </p>
                             <p><strong>Método de pago:</strong> <?= htmlspecialchars($contratacion['metodo']) ?></p>
                             <p><strong>Estado:</strong> 
-                                <span class="badge <?= getBadgeClass($contratacion['estado']) ?>">
+                                <span class=" <?= getBadgeClass($contratacion['estado']) ?>">
                                     <?= htmlspecialchars($contratacion['estado']) ?>
                                 </span>
                             </p>
@@ -77,7 +77,7 @@ try {
                         <div class="card-footer text-end">
                             <button 
                                 class="btn btn-success"
-                               
+                                <?= $contratacion['estado'] == 'Finalizado' ? 'disabled' : '' ?>
                             >
                                 Pagar
                             </button>
@@ -99,13 +99,13 @@ try {
 // Función para determinar la clase del badge del estado
 function getBadgeClass($estado) {
     switch (strtolower($estado)) {
-        case 'pendiente':
+        case 'Pendiente':
             return 'badge-warning';
         case 'activo':
             return 'badge-success';
-        case 'finalizado':
+        case 'Finalizado':
             return 'badge-primary';
-        case 'cancelado':
+        case 'Cancelado':
             return 'badge-danger';
         default:
             return 'badge-secondary';
