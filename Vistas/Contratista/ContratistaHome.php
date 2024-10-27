@@ -75,7 +75,7 @@ include '../Menu/sidebarContratista.php';
     <!-- Encabezado llamativo -->
     <div class="welcome-section">
         <div class="welcome-content">
-            <h1 class="display-5 fw-bold">Bienvenido a Freelanced-connect</h1>
+            <h1 class="display-5 fw-bold">Bienvenido a Freeland-connect</h1>
             <p class="fs-4">Gestiona tus proyectos y encuentra freelancers de manera eficiente</p>
         </div>
     </div>
@@ -152,5 +152,5 @@ include '../Menu/sidebarContratista.php';
     </div>
 
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <?php include '../Menu/footer.php'; ?>

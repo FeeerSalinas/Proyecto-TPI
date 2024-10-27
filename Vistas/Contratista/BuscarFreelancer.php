@@ -23,7 +23,6 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Freelancer</title>
-    <link rel="stylesheet" href="../../CSS/freelancer.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -35,7 +34,7 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
 
         #content {
             margin-top: 0;
-            padding: 2rem;
+            padding: 5rem;
             min-height: 100vh;
             background-color: var(--background-light);
         }
@@ -183,8 +182,6 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
             gap: -0.2rem;
         }
 
-       
-
         .no-results {
             text-align: center;
             padding: 3rem;
@@ -198,12 +195,11 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
             margin: 1rem auto 0.5rem; /* Reducido el margin-bottom de 1.5rem a 0.5rem */
         }
 
-       
-
         .card-content {
-            padding: 0.75rem 1.5rem 1.5rem; /* Reducido el padding-top de 1.5rem a 0.75rem */
+            padding: 0.55rem 2.5rem 3.5rem; /* Reducido el padding-top de 1.5rem a 0.75rem */
             text-align: center;
         }
+        
 
     </style>
 </head>
@@ -298,5 +294,5 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
         </aside>
     </div>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <?php include '../Menu/footer.php'; ?>

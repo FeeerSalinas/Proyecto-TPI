@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg">
+
+<nav class="navbar navbar-expand-lg fixed-top bg-white shadow-sm">
     <div class="container-fluid">
         <!-- Botón de Menú con Estilo Personalizado -->
         <button class="btn btn-menu me-3" id="navbarToggle">☰</button>
@@ -16,8 +17,8 @@
                 <li class="nav-item"><a class="nav-link" href="#">Mi Perfil</a></li>
             </ul>
 
-           <!-- Avatar con Menú Desplegable -->
-           <div class="dropdown">
+            <!-- Avatar con Menú Desplegable -->
+            <div class="dropdown">
                 <a 
                     href="#" 
                     class="d-flex align-items-center text-decoration-none dropdown-toggle" 
@@ -44,15 +45,3 @@
         </div>
     </div>
 </nav>
-
-<!-- Bootstrap JS y Popper.js -->
-<script 
-    src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" 
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" 
-    crossorigin="anonymous">
-</script>
-<script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" 
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" 
-    crossorigin="anonymous">
-</script>
