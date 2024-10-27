@@ -39,6 +39,9 @@
     } catch(PDOException $e) {
         die("Error en la consulta: " . $e->getMessage());
     }
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +106,7 @@
                                             <p><strong>Monto propuesto:</strong> $<?php echo number_format($propuesta['montoPropuesto'], 2); ?></p>
                                             <p class="propuesta-descripcion"><?php echo htmlspecialchars($propuesta['descripcion']); ?></p>
                                             <div class="propuesta-actions">
-                                                <?php if($propuesta['estado'] == 'Pendiente'): ?>
+                                                <?php if($propuesta['estado'] == 'pendiente'): ?>
                                                     <button class="btn btn-success btn-sm" 
                                                             onclick="aceptarPropuesta(<?php echo $propuesta['idPropuesta']; ?>)">
                                                         Aceptar
@@ -117,6 +120,42 @@
                                                             onclick="eliminarPropuesta(<?php echo $propuesta['idPropuesta']; ?>)">
                                                         Eliminar
                                                     </button>
+                                                <?php elseif($propuesta['estado'] == 'aceptada'): ?>
+                                                    <?php
+                                                    // Consultar si existe una contratación para esta propuesta
+                                                    $queryContratacion = "SELECT c.*, pa.estado as estado_pago 
+                                                                        FROM contrataciones c 
+                                                                        LEFT JOIN pagos pa ON c.idContrato = pa.idContratacion
+                                                                        WHERE c.idProyecto = :idProyecto 
+                                                                        AND c.idFreelancer = :idFreelancer";
+                                                    $stmtContratacion = $conn->prepare($queryContratacion);
+                                                    $stmtContratacion->bindParam(':idProyecto', $proyecto['idProyecto'], PDO::PARAM_INT);
+                                                    $stmtContratacion->bindParam(':idFreelancer', $propuesta['idFreelancer'], PDO::PARAM_INT);
+                                                    $stmtContratacion->execute();
+                                                    $contratacion = $stmtContratacion->fetch(PDO::FETCH_ASSOC);
+                                                    
+                                                    if ($contratacion && (!isset($contratacion['estado_pago']) || $contratacion['estado_pago'] != 'completado')): ?>
+                                                       <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+                                                            <input type="hidden" name="cmd" value="_xclick">
+                                                            <input type="hidden" name="business" value="sb-15k4m33627051@business.example.com">
+                                                            <input type="hidden" name="item_name" value="Pago por proyecto: <?php echo htmlspecialchars($proyecto['titulo']); ?>">
+                                                            <input type="hidden" name="amount" value="<?php echo $contratacion['pago']; ?>">
+                                                            <input type="hidden" name="currency_code" value="USD">
+                                                            <!-- Asegúrate de usar URLs absolutas con HTTPS -->
+                                                            <input type="hidden" name="return" value="http://localhost/ProyectoTPI/Views/Contratista/confirmarPagoPaypal.php?idContratacion=<?php echo $contratacion['idContrato']; ?>">
+                                                            <input type="hidden" name="cancel_return" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/misProyectos.php">
+                                                            <input type="hidden" name="notify_url" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/ipn_handler.php">
+                                                            <input type="hidden" name="custom" value="<?php echo $contratacion['idContrato']; ?>">
+                                                            <!-- Campos adicionales para Sandbox -->
+                                                            <input type="hidden" name="test_ipn" value="1">
+                                                            <input type="hidden" name="sandbox" value="1">
+                                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                                <i class="fab fa-paypal"></i> Pagar $<?php echo number_format($contratacion['pago'], 2); ?> (Sandbox)
+                                                            </button>
+                                                        </form>
+                                                    <?php elseif (isset($contratacion['estado_pago']) && $contratacion['estado_pago'] == 'completado'): ?>
+                                                        <span class="badge badge-success">Pago completado</span>
+                                                    <?php endif; ?>
                                                 <?php endif; ?>
                                             </div>
                                         </div>
