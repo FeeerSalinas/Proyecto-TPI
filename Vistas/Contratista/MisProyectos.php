@@ -106,7 +106,7 @@
                                             <p><strong>Monto propuesto:</strong> $<?php echo number_format($propuesta['montoPropuesto'], 2); ?></p>
                                             <p class="propuesta-descripcion"><?php echo htmlspecialchars($propuesta['descripcion']); ?></p>
                                             <div class="propuesta-actions">
-                                                <?php if($propuesta['estado'] == 'Pendiente'): ?>
+                                                <?php if($propuesta['estado'] == 'pendiente'): ?>
                                                     <button class="btn btn-success btn-sm" 
                                                             onclick="aceptarPropuesta(<?php echo $propuesta['idPropuesta']; ?>)">
                                                         Aceptar

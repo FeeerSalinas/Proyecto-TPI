@@ -30,12 +30,12 @@
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function obtenerPorId($id) {
+            $sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$id]);
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        }
     }
 
-    public function obtenerPorId($id) {
-        $sql = "SELECT * FROM usuarios WHERE idUsuario = ?";
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([$id]);
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-}
