@@ -133,20 +133,27 @@
                                                     $stmtContratacion->bindParam(':idFreelancer', $propuesta['idFreelancer'], PDO::PARAM_INT);
                                                     $stmtContratacion->execute();
                                                     $contratacion = $stmtContratacion->fetch(PDO::FETCH_ASSOC);
+
+                                                    if (!$contratacion): ?>
+                                                        <!-- Botón para crear contrato si no existe -->
+                                                        <a href="formularioContratacion.php?idPropuesta=<?php echo $propuesta['idPropuesta']; ?>" 
+                                                           class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-file-contract"></i> Crear Contrato
+                                                        </a>
                                                     
-                                                    if ($contratacion && (!isset($contratacion['estado_pago']) || $contratacion['estado_pago'] != 'completado')): ?>
+                                                        <?php elseif ($contratacion && (!isset($contratacion['estado_pago']) || $contratacion['estado_pago'] != 'completado')): ?>
                                                        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_blank">
                                                             <input type="hidden" name="cmd" value="_xclick">
                                                             <input type="hidden" name="business" value="sb-15k4m33627051@business.example.com">
                                                             <input type="hidden" name="item_name" value="Pago por proyecto: <?php echo htmlspecialchars($proyecto['titulo']); ?>">
                                                             <input type="hidden" name="amount" value="<?php echo $contratacion['pago']; ?>">
                                                             <input type="hidden" name="currency_code" value="USD">
-                                                            <!-- Asegúrate de usar URLs absolutas con HTTPS -->
+                                                            
                                                             <input type="hidden" name="return" value="http://localhost/ProyectoTPI/Views/Contratista/confirmarPagoPaypal.php?idContratacion=<?php echo $contratacion['idContrato']; ?>">
                                                             <input type="hidden" name="cancel_return" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/misProyectos.php">
                                                             <input type="hidden" name="notify_url" value="http://ProyectoTPI/mi-proyecto/Views/Contratista/ipn_handler.php">
                                                             <input type="hidden" name="custom" value="<?php echo $contratacion['idContrato']; ?>">
-                                                            <!-- Campos adicionales para Sandbox -->
+                                                           
                                                             <input type="hidden" name="test_ipn" value="1">
                                                             <input type="hidden" name="sandbox" value="1">
                                                             <button type="submit" class="btn btn-primary btn-sm">
