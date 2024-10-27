@@ -95,6 +95,31 @@
                 return false;
             }
         }
+        public function InsertUsuario(int $tipoUsuario){
+
+            //Traer los elementos por ID del form
+            $nombre = $_REQUEST['Nombre'];
+            $correo = $_REQUEST['Correo'];
+            $usuario = $_REQUEST['Usuario'];
+            $contrasenia = $_REQUEST['Contrasenia'];
+            $telefono = $_REQUEST['Telefono'];
+            $direccion = $_REQUEST['Direccion'];
+
+            //Insertar un nuevo usuario
+            $insert = $this->ObjUsuarioModel->insertUsuario(
+                $nombre, $correo, $usuario, $contrasenia, $telefono, $direccion, $tipoUsuario
+            );
+
+            if($insert != null){
+
+                if($tipoUsuario == 0){
+                    header('Location: ../../Vistas/Contratista/ContratistaHome.php');
+                }else{
+                    header('Location: ../../Vistas/Freelancer/FreelancerHome.php');   
+                }
+
+            }
+        }
 
         // Método combinado para actualizar descripción y categoría
         public function actualizarPerfilFreelancer($idUsuario, $descripcion, $idCategoria) {

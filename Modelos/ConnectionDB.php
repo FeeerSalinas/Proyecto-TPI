@@ -3,7 +3,7 @@
         //Atributos de conexión
         private $host = "localhost"; //Cambiar el puerto por localhost
         private $user = "root";
-        private $pass = "1234";
+        private $pass = "";
         private $db = "freelanddb";
         private $conDB;
         private $response = "Conexión exitosa";
