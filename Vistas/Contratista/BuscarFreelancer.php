@@ -24,21 +24,15 @@ if (!isset($_SESSION['idUsuario'])) {
     $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Buscar Freelancer</title>
 
-    <link 
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet"
-        crossorigin="anonymous"
-    />
+
 <link rel="stylesheet" href="../../CSS/freelancer.css">    
 </head>
-<body>
+
 <div class="container-fluid">
     <div class="row">
         <!-- Contenido principal -->
@@ -80,7 +74,10 @@ if (!isset($_SESSION['idUsuario'])) {
                                     <p class="card-text text-muted">
                                         <?= htmlspecialchars(substr($freelancer['descripcionPerfil'], 0, 60)) ?>...
                                     </p>
-                                    <a href="#" class="btn btn-outline-primary btn-sm">Ver Perfil</a>
+                                    <a href="perfilFreelancer.php?id=<?= $freelancer['idUsuario'] ?>" class="btn btn-outline-primary btn-sm">
+                                        Ver Perfil
+                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -91,24 +88,30 @@ if (!isset($_SESSION['idUsuario'])) {
             </div>
         </div>
         <!-- Barra lateral con categorías al lado derecho -->
-        <aside class="col-md-2 p-3 bg-light position-fixed end-0" style="height: 100vh;">
-            <h5 class="text-center">Categorías</h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item text-center">
-                    <a href="?nombre=<?= $nombre ?>">Todas</a>
-                </li>
-                <?php foreach ($categorias as $categoria): ?>
-                    <li class="list-group-item text-center">
-                        <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
-                            <?= htmlspecialchars($categoria['nombre']) ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </aside>
+<aside class="col-md-2 p-3 bg-light position-fixed end-0" style="height: 100vh;">
+    <!-- Botón para Freelancers Contratados -->
+    <div class="d-grid gap-2 mb-4">
+        <a href="../Contratista/freelancersContratados.php" class="btn btn-primary btn-lg">
+            Freelancers Contratados
+        </a>
+    </div>
+
+    <h5 class="text-center">Categorías</h5>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item text-center">
+            <a href="?nombre=<?= $nombre ?>">Todas</a>
+        </li>
+        <?php foreach ($categorias as $categoria): ?>
+            <li class="list-group-item text-center">
+                <a href="?nombre=<?= $nombre ?>&categoria=<?= $categoria['idCategoria'] ?>">
+                    <?= htmlspecialchars($categoria['nombre']) ?>
+                </a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+</aside>
+
     </div>
 </div>
 
 <?php include '../Menu/footer.php'; ?>
-</body>
-</html>

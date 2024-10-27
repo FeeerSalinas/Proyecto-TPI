@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");  // Redirigir si no hay sesión activa
+    exit();
+}
+?>
+<?php
 require_once('../../Modelos/ConnectionDB.php'); 
 
 // Asegurarse de que no haya salida antes del header
