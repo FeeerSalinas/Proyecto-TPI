@@ -1,15 +1,19 @@
 <?php
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");  // Redirigir si no hay sesión activa
+    exit();
+}
+?>
+<?php
     require_once("../../Modelos/UsuarioModel.php");
     include '../Menu/header.php';   // Header con estilos
     include '../Menu/navbarContratista.php';   // Navbar superior
     include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
 
-    // Iniciar sesión y verificar usuario
-    session_start();
-    if (!isset($_SESSION['idUsuario'])) {
-        header("Location: ../login.php");
-        exit();
-    }
+ 
 
     // Obtener datos del perfil
     $usuarioModel = new UsuarioModel();

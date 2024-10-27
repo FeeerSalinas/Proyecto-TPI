@@ -1,12 +1,12 @@
 <?php
-session_start(); // Siempre lo primero
+session_start();
 
+// Verificar si el usuario está logueado
 if (!isset($_SESSION['idUsuario'])) {
-    header("Location: ../index.php"); // Redirigir si no hay sesión activa
+    header("Location: ../index.php");  // Redirigir si no hay sesión activa
     exit();
 }
 ?>
-
 <?php
     include '../Menu/header.php';   // Header con estilos
     include '../Menu/navbarContratista.php';   // Navbar superior
