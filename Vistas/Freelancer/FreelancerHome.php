@@ -70,6 +70,7 @@ include '../Menu/sidebarFreelancer.php';
 </head>
 
 <div class="content" id="content">
+&nparsl; 
     <!-- Encabezado llamativo -->
     <div class="welcome-section">
         <div class="welcome-content">

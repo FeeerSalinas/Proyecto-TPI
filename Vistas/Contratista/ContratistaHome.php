@@ -70,7 +70,7 @@ include '../Menu/sidebarContratista.php';
 </style>
 </head>
 
-
+&nparsl; 
     <div class="content" id="content">
     <!-- Encabezado llamativo -->
     <div class="welcome-section">
