@@ -58,8 +58,8 @@
 
         public function obtenerPerfil($idUsuario) {
             $sql = "SELECT u.nombre, u.tipoUsuario, u.telefono, u.direccion, 
-                           u.descripcionPerfil, u.fotoPerfil, u.idCategoria,
-                           c.nombre as nombreCategoria
+                        u.descripcionPerfil, u.fotoPerfil, u.idCategoria,
+                        c.nombre as nombreCategoria
                     FROM usuarios u 
                     LEFT JOIN categoria c ON u.idCategoria = c.idCategoria 
                     WHERE u.idUsuario = ?";
