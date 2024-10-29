@@ -12,7 +12,7 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="#">Buscar Proyectos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Mis Proyectos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">Mis propuestas</a></li>
+                <li class="nav-item"><a class="nav-link" href="../Freelancer/freelancersContratados.php">Mis propuestas</a></li>
                 <li class="nav-item"><a class="nav-link" href="../Freelancer/perfilFreelancer.php">Mi Perfil</a></li>
             </ul>
 

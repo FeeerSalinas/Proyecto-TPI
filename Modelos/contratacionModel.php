@@ -20,7 +20,7 @@ class ContratacionModel {
     }
 
     public function crearContratacion($idServicio, $idFreelancer, $idContratista, $metodo, $fechaInicio, $fechaFin, $pago) {
-        $sql = "INSERT INTO contrataciones (idServicio, idFreelancer, idContratista, metodo, fechaInicio, fechaFin, estado, pago) 
+        $sql = "INSERT INTO contratacionesf (idServicio, idFreelancer, idContratista, metodo, fechaInicio, fechaFin, estado, pago) 
                 VALUES (?, ?, ?, ?, ?, ?, 'Pendiente', ?)";
         $stmt = $this->db->prepare($sql);
 

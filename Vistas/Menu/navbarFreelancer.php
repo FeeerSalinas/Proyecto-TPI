@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="../Freelancer/BuscarProyectos.php">Buscar Proyectos</a></li>
-                <li class="nav-item"><a class="nav-link" href="MisPropuestas.php">Mis Propuestas</a></li>
+                <li class="nav-item"><a class="nav-link" href="../Freelancer/freelancerContrataciones.php">Mis Propuestas</a></li>
                 <li class="nav-item"><a class="nav-link" href="perfilFreelancer.php">Mi Perfil</a></li>
             </ul>
 

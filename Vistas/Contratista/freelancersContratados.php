@@ -24,7 +24,7 @@ try {
             c.idContrato, c.fechaContratacion, c.estado, c.metodo, 
             s.titulo AS servicio_titulo, s.descripcion AS servicio_descripcion,
             f.nombre AS freelancer_nombre, f.correo AS freelancer_correo
-        FROM contrataciones c
+        FROM contratacionesf c
         JOIN servicios s ON c.idServicio = s.idServicio
         JOIN usuarios f ON c.idFreelancer = f.idUsuario
         WHERE c.idContratista = :idContratista
