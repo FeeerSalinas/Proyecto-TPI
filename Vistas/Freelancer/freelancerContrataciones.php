@@ -41,6 +41,10 @@ try {
     exit();
 }
 ?>
+<head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
 
 <div class="content" id="content">
     <h1 class="text-center mb-5">Mis Contrataciones</h1>
@@ -71,32 +75,40 @@ try {
                                 <?= date('d/m/Y', strtotime($contratacion['fechaContratacion'])) ?>
                             </p>
                         </div>
-                        <div class="card-footer text-end">
-                            <form method="POST" action="../../Controladores/procesarEstado.php" class="d-inline">
-                                <input type="hidden" name="idContrato" value="<?= $contratacion['idContrato'] ?>">
-                                <button 
-                                    type="submit" 
-                                    name="estado" 
-                                    value="Aceptada" 
-                                    class="btn btn-success"
-                                    <?= $contratacion['estado'] !== 'Pendiente' ? 'disabled' : '' ?>
-                                >
-                                    Aceptar
-                                </button>
-                            </form>
-                            <form method="POST" action="procesarEstado.php" class="d-inline">
-                                <input type="hidden" name="idContrato" value="<?= $contratacion['idContrato'] ?>">
-                                <button 
-                                    type="submit" 
-                                    name="estado" 
-                                    value="Rechazada" 
-                                    class="btn btn-danger"
-                                    <?= $contratacion['estado'] !== 'Pendiente' ? 'disabled' : '' ?>
-                                >
-                                    Rechazar
-                                </button>
-                            </form>
-                        </div>
+
+                        <!-- Mostrar botones solo si el estado es 'Pendiente' -->
+                        <?php if ($contratacion['estado'] === 'Pendiente'): ?>
+                            <div class="card-footer text-end">
+                                <form method="POST" action="../../Controladores/procesarEstado.php" class="d-inline">
+                                    <input type="hidden" name="idContrato" value="<?= $contratacion['idContrato'] ?>">
+                                    <button 
+                                        type="submit" 
+                                        name="estado" 
+                                        value="Aceptada" 
+                                        class="btn btn-success"
+                                    >
+                                        Aceptar
+                                    </button>
+                                </form>
+                                <form method="POST" action="../../Controladores/procesarEstado.php" class="d-inline">
+                                    <input type="hidden" name="idContrato" value="<?= $contratacion['idContrato'] ?>">
+                                    <button 
+                                        type="submit" 
+                                        name="estado" 
+                                        value="Rechazada" 
+                                        class="btn btn-danger"
+                                    >
+                                        Rechazar
+                                    </button>
+                                </form>
+                            </div>
+                        <?php else: ?>
+                            <div class="card-footer text-center">
+                                <span class="badge <?= getBadgeClass($contratacion['estado']) ?> fs-5">
+                                    <?= htmlspecialchars($contratacion['estado']) ?>
+                                </span>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -111,17 +123,18 @@ try {
 <?php include '../Menu/footer.php'; ?>
 
 <?php
-// Función para determinar la clase del badge del estado
+// Función para determinar la clase del badge según el estado
 function getBadgeClass($estado) {
     switch (strtolower($estado)) {
         case 'pendiente':
-            return 'badge-warning';
+            return 'badge bg-warning text-dark';  // Clase Bootstrap para amarillo
         case 'aceptada':
-            return 'badge-success';
+            return 'badge bg-success';  // Clase Bootstrap para verde
         case 'rechazada':
-            return 'badge-danger';
+            return 'badge bg-danger';  // Clase Bootstrap para rojo
         default:
-            return 'badge-secondary';
+            return 'badge bg-secondary';  // Clase Bootstrap para gris
     }
 }
 ?>
+

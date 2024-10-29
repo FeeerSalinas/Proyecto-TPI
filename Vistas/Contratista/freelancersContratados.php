@@ -23,7 +23,8 @@ try {
         SELECT 
             c.idContrato, c.fechaContratacion, c.estado, c.metodo, 
             s.titulo AS servicio_titulo, s.descripcion AS servicio_descripcion,
-            f.nombre AS freelancer_nombre, f.correo AS freelancer_correo
+            f.nombre AS freelancer_nombre, f.correo AS freelancer_correo, 
+            c.pago AS montoPago
         FROM contratacionesf c
         JOIN servicios s ON c.idServicio = s.idServicio
         JOIN usuarios f ON c.idFreelancer = f.idUsuario
@@ -58,7 +59,7 @@ try {
                                 <?= htmlspecialchars($contratacion['freelancer_nombre']) ?>
                             </h5>
                             <p><strong>Servicio:</strong> <?= htmlspecialchars($contratacion['servicio_titulo']) ?></p>
-                            <p><strong>Descripción: </strong><?= htmlspecialchars($contratacion['servicio_descripcion']) ?></p>
+                            <p><strong>Descripción:</strong> <?= htmlspecialchars($contratacion['servicio_descripcion']) ?></p>
                             <p><strong>Correo:</strong> 
                                 <a href="mailto:<?= htmlspecialchars($contratacion['freelancer_correo']) ?>">
                                     <?= htmlspecialchars($contratacion['freelancer_correo']) ?>
@@ -66,21 +67,34 @@ try {
                             </p>
                             <p><strong>Método de pago:</strong> <?= htmlspecialchars($contratacion['metodo']) ?></p>
                             <p><strong>Estado:</strong> 
-                                <span class=" <?= getBadgeClass($contratacion['estado']) ?>">
+                                <span class="<?= getBadgeClass($contratacion['estado']) ?>">
                                     <?= htmlspecialchars($contratacion['estado']) ?>
                                 </span>
                             </p>
                             <p><strong>Fecha de Contratación:</strong> 
                                 <?= date('d/m/Y', strtotime($contratacion['fechaContratacion'])) ?>
                             </p>
+                            <p><strong>Monto a Pagar:</strong> $<?= htmlspecialchars($contratacion['montoPago']) ?></p>
                         </div>
+
                         <div class="card-footer text-end">
-                            <button 
-                                class="btn btn-success"
-                                <?= $contratacion['estado'] == 'Finalizado' ? 'disabled' : '' ?>
-                            >
-                                Pagar
-                            </button>
+                            <?php if ($contratacion['estado'] === 'Aceptada'): ?>
+                                <!-- Botón de PayPal habilitado -->
+                                <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                                    <input type="hidden" name="cmd" value="_xclick">
+                                    <input type="hidden" name="business" value="tucorreo@paypal.com">
+                                    <input type="hidden" name="item_name" value="<?= htmlspecialchars($contratacion['servicio_titulo']) ?>">
+                                    <input type="hidden" name="amount" value="<?= htmlspecialchars($contratacion['montoPago']) ?>">
+                                    <input type="hidden" name="currency_code" value="USD">
+                                    <input type="hidden" name="return" value="https://tu-sitio.com/exito">
+                                    <input type="hidden" name="cancel_return" value="https://tu-sitio.com/cancelado">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fab fa-paypal"></i> Pagar con PayPal
+                                    </button>
+                                </form>
+                            <?php else: ?>
+                                <button class="btn btn-secondary" disabled>No disponible</button>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -99,16 +113,14 @@ try {
 // Función para determinar la clase del badge del estado
 function getBadgeClass($estado) {
     switch (strtolower($estado)) {
-        case 'Pendiente':
-            return 'badge-warning';
-        case 'activo':
-            return 'badge-success';
-        case 'Finalizado':
-            return 'badge-primary';
-        case 'Cancelado':
-            return 'badge-danger';
+        case 'pendiente':
+            return 'badge bg-warning text-dark';  // Amarillo
+        case 'aceptada':
+            return 'badge bg-success';  // Verde
+        case 'rechazada':
+            return 'badge bg-danger';  // Rojo
         default:
-            return 'badge-secondary';
+            return 'badge bg-secondary';  // Gris
     }
 }
 ?>
