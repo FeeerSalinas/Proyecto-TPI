@@ -117,15 +117,15 @@ include '../Menu/sidebarFreelancer.php';
 
         <!-- Proyectos Activos -->
         <div class="col-md-6">
-            <a href="../Freelancer/ProyectosActivos.php" class="text-decoration-none">
+            <a href="../Freelancer/freelancerContrataciones.php" class="text-decoration-none">
                 <div class="card feature-card bg-light h-100">
                     <div class="card-body d-flex align-items-center">
                         <div class="feature-icon bg-info text-white rounded-circle p-3 me-3">
                             <i class="fas fa-tasks fa-2x"></i>
                         </div>
                         <div>
-                            <h3 class="card-title">Proyectos Activos</h3>
-                            <p class="card-text text-muted">Administra tus proyectos en curso</p>
+                            <h3 class="card-title">Propuestas de contratistas</h3>
+                            <p class="card-text text-muted">Acepta propuestas de proyectos especifícos</p>
                         </div>
                     </div>
                 </div>

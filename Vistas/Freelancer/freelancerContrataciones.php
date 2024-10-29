@@ -43,11 +43,135 @@ try {
 ?>
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+:root {
+    --primary-color: #0070ba;
+    --primary-dark: #003087;
+    --success-color: #10B981;
+    --warning-color: #F59E0B;
+    --danger-color: #dc3545;
+    --gray-bg: #F9FAFB;
+    --card-border-radius: 1rem;
+    --transition-speed: 0.3s;
+}
 
+body {
+    background-color: var(--gray-bg);
+    font-family: 'Inter', 'Arial', sans-serif;
+}
+
+h1 {
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.card {
+    border: none;
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+    background: white;
+    margin-bottom: 1rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.card-title {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--gray-bg);
+    padding-bottom: 0.75rem;
+}
+
+.card-footer {
+    background-color: #F8FAFC;
+    border-top: 1px solid #E2E8F0;
+    padding: 1rem;
+    text-align: center;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+}
+
+.badge.bg-warning {
+    background-color: #FEF3C7 !important;
+    color: #92400E !important;
+}
+
+.badge.bg-success {
+    background-color: #D1FAE5 !important;
+    color: #065F46 !important;
+}
+
+.badge.bg-danger {
+    background-color: #FEE2E2 !important;
+    color: #991B1B !important;
+}
+
+.alert-info {
+    background-color: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1E40AF;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+}
+
+.btn {
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    transition: all var(--transition-speed);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #059669;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+}
+
+.btn-danger {
+    background-color: var(--danger-color);
+    border: none;
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+
+@media (max-width: 768px) {
+    .card-body, .card-footer {
+        text-align: center;
+    }
+    .btn {
+        width: 100%;
+    }
+}
+</style>
 </head>
 
 <div class="content" id="content">
-    <h1 class="text-center mb-5">Mis Contrataciones</h1>
+    <h1 class="text-center mb-5">Propuestas de contratistas</h1>
 
     <?php if (!empty($contrataciones)): ?>
         <div class="row">

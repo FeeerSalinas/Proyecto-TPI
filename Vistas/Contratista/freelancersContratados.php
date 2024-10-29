@@ -41,6 +41,109 @@ try {
     exit();
 }
 ?>
+<style>
+    :root {
+        --primary-color: #0070ba; /* PayPal Blue */
+        --primary-dark: #003087;  /* PayPal Dark Blue */
+        --success-color: #10B981;
+        --warning-color: #F59E0B;
+        --danger-color: #EF4444;
+        --gray-bg: #F9FAFB;
+        --card-border-radius: 1rem;
+        --transition-speed: 0.3s;
+    }
+
+    body {
+        background-color: var(--gray-bg);
+        font-family: 'Inter', 'Arial', sans-serif;
+    }
+
+    .card {
+        border: none;
+        border-radius: var(--card-border-radius);
+        overflow: hidden;
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        background: white;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 1.25rem;
+        border-bottom: 2px solid var(--gray-bg);
+        padding-bottom: 0.75rem;
+    }
+
+    .badge.bg-warning {
+        background-color: #FEF3C7 !important;
+        color: #92400E !important;
+    }
+
+    .badge.bg-success {
+        background-color: #D1FAE5 !important;
+        color: #065F46 !important;
+    }
+
+    .badge.bg-danger {
+        background-color: #FEE2E2 !important;
+        color: #991B1B !important;
+    }
+
+    .card-footer {
+        background-color: #F8FAFC;
+        border-top: 1px solid #E2E8F0;
+        padding: 1rem 1.5rem;
+    }
+
+    .btn-primary {
+        background: blue;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        color: white;
+        transition: all var(--transition-speed);
+    }
+
+    .btn-primary:hover {
+        background: #4947f3;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 112, 186, 0.3); /* PayPal color shadow */
+    }
+
+    .btn-primary:disabled {
+        background: #E2E8F0;
+        cursor: not-allowed;
+    }
+
+    .btn-primary i {
+        margin-right: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            margin-bottom: 1rem;
+        }
+        
+        .card-body {
+            padding: 1rem;
+        }
+        
+        .card-footer {
+            padding: 1rem;
+        }
+    }
+</style>
 
 <div class="content" id="content">
     <a href="BuscarFreelancer.php" class="btn btn-secondary mb-4">

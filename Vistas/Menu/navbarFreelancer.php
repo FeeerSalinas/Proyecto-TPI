@@ -11,14 +11,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="../Freelancer/BuscarProyectos.php">Buscar Proyectos</a></li>
-                <li class="nav-item"><a class="nav-link" href="../Freelancer/freelancerContrataciones.php">Mis Propuestas</a></li>
+                <li class="nav-item"><a class="nav-link" href="../Freelancer/misPropuestas.php">Mis Propuestas</a></li>
                 <li class="nav-item"><a class="nav-link" href="perfilFreelancer.php">Mi Perfil</a></li>
             </ul>
 
-            <!-- Avatar de Usuario -->
-            <div class="d-flex align-items-center">
-                <img src="../../IMG/user.png" alt="Usuario" class="rounded-circle" height="40">
-            </div>
+           <!-- Avatar con Menú Desplegable -->
+      
+                    <img 
+                        src="../../IMG/user.png" 
+                        alt="Usuario" 
+                        class="rounded-circle perfil-img" 
+                        height="40"
+                    >
+                    <span class="nombre-usuario ms-3 text-dark">
+                        <?= htmlspecialchars($_SESSION['nombreUsuario']) ?>
+                    </span>
+                </a>
         </div>
     </div>
 </nav>

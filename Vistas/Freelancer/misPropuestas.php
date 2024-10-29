@@ -1,7 +1,14 @@
 <?php
-include '../Menu/header.php';   // Header con estilos
-include '../Menu/sidebarFreelancer.php';   // Navbar superior
-include '../Menu/navbarFreelancer.php';  // Sidebar izquierdo
+session_start();
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
+include '../Menu/header.php';
+include '../Menu/navbarFreelancer.php';
+include '../Menu/sidebarFreelancer.php';
 
 require_once('../../Modelos/ConnectionDB.php');
 session_start();
