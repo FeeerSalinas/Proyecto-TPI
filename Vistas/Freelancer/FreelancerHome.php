@@ -1,132 +1,155 @@
 <?php
-    require_once("../../Modelos/UsuarioModel.php");
-    include '../Menu/header.php';   
-    include '../Menu/navbar.php';   
-    include '../Menu/sidebar.php'; 
+session_start();
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
 
-    // Iniciar sesión y verificar usuario
-    session_start();
-    if (!isset($_SESSION['idUsuario'])) {
-        header("Location: ../login.php");
-        exit();
-    }
-
-    // Obtener datos del perfil y categorías
-    $usuarioModel = new UsuarioModel();
-    $perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
-    $categorias = $usuarioModel->obtenerCategorias();
-
-    // Procesar actualización de perfil
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $descripcion = trim($_POST['descripcion'] ?? '');
-        $idCategoria = isset($_POST['categoria']) ? (int)$_POST['categoria'] : null;
-
-        if ($usuarioModel->actualizarPerfilFreelancer($_SESSION['idUsuario'], $descripcion, $idCategoria)) {
-            echo "<script>
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'Perfil actualizado correctamente',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            </script>";
-            $perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
-        }
-    }
+include '../Menu/header.php';
+include '../Menu/navbarFreelancer.php';
+include '../Menu/sidebarFreelancer.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil-Freelancer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../CSS/perfiles.css">
-    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
+<style>
+    /* Estilo general del contenido */
+    #content {
+        margin-top: 0;
+        padding-top: 20px;
+        min-height: 100vh;
+        background-color: #f8f9fa;
+    }
+
+    /* Estilo para la sección de bienvenida */
+    .welcome-section {
+        background-image: url('../../IMG/homec.jpg'); /* Imagen de fondo para freelancers */
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-radius: 20px;
+        padding: 60px 20px;
+        color: white;
+        margin: 20px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+
+    .welcome-content {
+        background: rgba(0, 0, 0, 0.6);
+        padding: 20px;
+        border-radius: 15px;
+        display: inline-block;
+        width: auto;
+    }
+
+    .welcome-section h1 {
+        font-family: 'Arial', sans-serif;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .welcome-section p {
+        font-style: italic;
+        font-weight: 100;
+        margin-bottom: 10px;
+    }
+
+    /* Estilo para las tarjetas */
+    .feature-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+        border-radius: 15px;
+    }
+
+    .feature-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+</style>
 </head>
-<body>
-    <div class="content">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card profile-card">
-                        <div class="card-body">
-                            <!-- Imagen de perfil -->
-                            <div class="text-center mb-4">
-                                <?php if (!empty($perfil['fotoPerfil'])): ?>
-                                    <img src="<?php echo $perfil['fotoPerfil']; ?>" alt="Foto de perfil" 
-                                        class="rounded-circle profile-image mb-3">
-                                <?php else: ?>
-                                    <img src="../../IMG/jaker.png" alt="Foto de perfil por defecto" 
-                                        class="rounded-circle profile-image mb-3">
-                                <?php endif; ?>
-                            </div>
 
-                            <h2 class="text-center mb-4">Mi Perfil</h2>
-                            
-                            <!-- Información del perfil -->
-                            <div class="row mb-3">
-                                <div class="col-md-4 fw-bold">Nombre:</div>
-                                <div class="col-md-8"><?php echo htmlspecialchars($perfil['nombre']); ?></div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-4 fw-bold">Tipo de Usuario:</div>
-                                <div class="col-md-8"><?php echo htmlspecialchars($perfil['tipoUsuario']); ?></div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-4 fw-bold">Teléfono:</div>
-                                <div class="col-md-8"><?php echo htmlspecialchars($perfil['telefono']); ?></div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <div class="col-md-4 fw-bold">Dirección:</div>
-                                <div class="col-md-8"><?php echo htmlspecialchars($perfil['direccion']); ?></div>
-                            </div>
-
-                            <!-- Formulario de actualización -->
-                            <form method="POST" class="mt-4">
-                                <!-- Select de categorías -->
-                                <div class="mb-3">
-                                    <label for="categoria" class="form-label fw-bold">Categoría:</label>
-                                    <select class="form-select" id="categoria" name="categoria" required>
-                                        <option value="">Seleccione una categoría</option>
-                                        <?php foreach ($categorias as $categoria): ?>
-                                            <option value="<?php echo $categoria['idCategoria']; ?>"
-                                                <?php echo ($perfil['idCategoria'] == $categoria['idCategoria']) ? 'selected' : ''; ?>>
-                                                <?php echo htmlspecialchars($categoria['nombre']); ?>
-                                            </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-
-                                <!-- Descripción del perfil -->
-                                <div class="mb-3">
-                                    <label for="descripcion" class="form-label fw-bold">Descripción del Perfil:</label>
-                                    <textarea class="form-control" id="descripcion" name="descripcion" 
-                                            rows="4" placeholder="Describe tu perfil profesional..."><?php 
-                                            echo htmlspecialchars($perfil['descripcionPerfil'] ?? ''); ?></textarea>
-                                </div>
-
-                                <!-- Botón de actualizar -->
-                                <div class="text-center">
-                                    <button type="submit" class="btn btn-actualizar">
-                                        Actualizar Perfil
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="content" id="content">
+&nparsl; 
+    <!-- Encabezado llamativo -->
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <h1 class="display-5 fw-bold">Bienvenido a tu espacio Freelancer</h1>
+            <p class="fs-4">Encuentra proyectos y conecta con clientes potenciales</p>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <!-- Tarjetas de características principales -->
+    <div class="row g-4 mb-4">
+        <!-- Buscar Proyectos -->
+        <div class="col-md-6">
+            <a href="../Freelancer/BuscarProyectos.php" class="text-decoration-none">
+                <div class="card feature-card bg-light h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="feature-icon bg-primary text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-search-dollar fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Buscar Proyectos</h3>
+                            <p class="card-text text-muted">Explora oportunidades de trabajo disponibles</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
 
+        <!-- Mis Postulaciones -->
+        <div class="col-md-6">
+            <a href="../Freelancer/misPropuestas.php" class="text-decoration-none">
+                <div class="card feature-card bg-light h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="feature-icon bg-success text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-clipboard-list fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Mis Postulaciones</h3>
+                            <p class="card-text text-muted">Gestiona tus propuestas enviadas</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Proyectos Activos -->
+        <div class="col-md-6">
+            <a href="../Freelancer/freelancerContrataciones.php" class="text-decoration-none">
+                <div class="card feature-card bg-light h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="feature-icon bg-info text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-tasks fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Propuestas de contratistas</h3>
+                            <p class="card-text text-muted">Acepta propuestas de proyectos especifícos</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Mi Perfil -->
+        <div class="col-md-6">
+            <a href="../Freelancer/perfilFreelancer.php" class="text-decoration-none">
+                <div class="card feature-card bg-light h-100">
+                    <div class="card-body d-flex align-items-center">
+                        <div class="feature-icon bg-warning text-white rounded-circle p-3 me-3">
+                            <i class="fas fa-user-circle fa-2x"></i>
+                        </div>
+                        <div>
+                            <h3 class="card-title">Mi Perfil</h3>
+                            <p class="card-text text-muted">Actualiza tu portafolio y habilidades</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <?php include '../Menu/footer.php'; ?>

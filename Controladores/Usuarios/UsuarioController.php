@@ -32,9 +32,9 @@
             if($insert != null){
 
                 if($tipoUsuario == 0){
-                    header('Location: ../../Vistas/Contratista/ContratistaHome.php');
+                    header('Location: ../../Vistas/Login.php');
                 }else{
-                    header('Location: ../../Vistas/Freelancer/FreelancerHome.php');   
+                    header('Location: ../../Vistas/Login.php');   
                 }
 
             }
@@ -55,4 +55,6 @@
             $ObjUsuarioController->InsertUsuario(1);
             break;
     }
+
+    
 ?>
