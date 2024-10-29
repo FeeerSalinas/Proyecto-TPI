@@ -13,7 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt = $conn->prepare($query);
         $stmt->execute([$nuevoEstado, $idContrato]);
 
-        header("Location: freelancerContrataciones.php?mensaje=estado_actualizado");
+        // Redirigir de nuevo a la vista freelancerContrataciones.php
+        header("Location: ../Vistas/Freelancer/freelancerContrataciones.php?mensaje=estado_actualizado");
         exit();
     } catch (PDOException $e) {
         echo "<p>Error al actualizar el estado: " . $e->getMessage() . "</p>";
