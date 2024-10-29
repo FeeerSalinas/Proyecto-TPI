@@ -1,4 +1,11 @@
 <?php
+session_start();
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['idUsuario'])) {
+    header("Location: ../index.php");
+    exit();
+}
+
 include '../Menu/header.php';
 include '../Menu/sidebarFreelancer.php';
 include '../Menu/navbarFreelancer.php';
