@@ -86,7 +86,7 @@
     <!--Librería para encriptar la contraseña -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <script src="../JS/Functions.js"></script>
+    <script src="../JS/Functions.js" type="module"></script>
 </body>
 
 </html>

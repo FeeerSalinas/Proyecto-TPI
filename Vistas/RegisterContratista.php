@@ -31,7 +31,7 @@
                         <input type="text" class="form-control" placeholder="Usuario" name="Usuario" id="Usuario" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="Contrasenia" id="Contrasenia" required>
+                        <input type="password" class="form-control" placeholder="Contraseña" name="Contrasenia" id="Contrasenia" required onfocus="validarContrasenias();">
                     </div>
                     <div class="mb-3">
                         <input type="password" class="form-control" placeholder="Confirmar contraseña" id="ConfirmarContrasenia" required>
@@ -82,7 +82,7 @@
     <!--Librería para encriptar la  contraseña -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <script src="../JS/Functions.js"></script>
+    <script src="../JS/Functions.js" type="module"></script>
 
 
 </body>
