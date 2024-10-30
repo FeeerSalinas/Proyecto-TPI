@@ -1,4 +1,3 @@
-
 <head>
     <style>
         /* Asegura que la imagen del navbar tenga tamaño controlado */
@@ -17,6 +16,13 @@
         /* Estilos para evitar que la imagen se desborde */
         .navbar {
             overflow: hidden;
+        }
+
+        /* Imagen de perfil */
+        .perfil-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
         }
     </style>
 </head>
@@ -39,18 +45,15 @@
             </ul>
 
             <!-- Avatar con Menú Desplegable -->
-      
-                    <img 
-                        src="../../IMG/user.png" 
-                        alt="Usuario" 
-                        class="rounded-circle perfil-img" 
-                        height="40"
-                    >
-                    <span class="nombre-usuario ms-3 text-dark">
-                        <?= htmlspecialchars($_SESSION['nombreUsuario']) ?>
-                    </span>
-                </a>
-               
+            <img 
+                src="<?= isset($_SESSION['profileImageUrl']) ? $_SESSION['profileImageUrl'] : '../../IMG/user.png'; ?>" 
+                alt="Usuario" 
+                class="rounded-circle perfil-img" 
+                height="40"
+            >
+            <span class="nombre-usuario ms-3 text-dark">
+                <?= htmlspecialchars($_SESSION['nombreUsuario']) ?>
+            </span>
         </div>
     </div>
 </nav>

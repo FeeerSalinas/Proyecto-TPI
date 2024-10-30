@@ -6,34 +6,63 @@ if (!isset($_SESSION['idUsuario'])) {
     header("Location: ../index.php");  // Redirigir si no hay sesión activa
     exit();
 }
-?>
-<?php
-    require_once("../../Modelos/UsuarioModel.php");
-    include '../Menu/header.php';   // Header con estilos
-    include '../Menu/navbarContratista.php';   // Navbar superior
-    include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
 
- 
+require_once("../../Modelos/UsuarioModel.php");
+include '../Menu/header.php';   // Header con estilos
+include '../Menu/navbarContratista.php';   // Navbar superior
+include '../Menu/sidebarContratista.php';  // Sidebar izquierdo
 
-    // Obtener datos del perfil
-    $usuarioModel = new UsuarioModel();
-    $perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
+// Obtener datos del perfil
+$usuarioModel = new UsuarioModel();
+$perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
 
-    // Procesar actualización de descripción
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['descripcion'])) {
-        $descripcion = trim($_POST['descripcion']);
-        if ($usuarioModel->actualizarDescripcion($_SESSION['idUsuario'], $descripcion)) {
-            echo "<script>
-                Swal.fire({
-                    title: '¡Éxito!',
-                    text: 'Descripción actualizada correctamente',
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                });
-            </script>";
-            $perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
-        }
+// Procesar actualización de descripción
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['descripcion'])) {
+    $descripcion = trim($_POST['descripcion']);
+    if ($usuarioModel->actualizarDescripcion($_SESSION['idUsuario'], $descripcion)) {
+        echo "<script>
+            Swal.fire({
+                title: '¡Éxito!',
+                text: 'Descripción actualizada correctamente',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>";
+        $perfil = $usuarioModel->obtenerPerfil($_SESSION['idUsuario']);
     }
+}
+
+// Definir arrays de avatares según el género
+$maleAvatars = [
+    "https://i.ibb.co/CVD3cXQ/avatar-contratista-2.png",
+    "https://i.ibb.co/z7BCK70/avatar-contratista-3.png",
+    "https://i.ibb.co/M9Qw0fh/avatar-contratista.png"
+];
+
+$femaleAvatars = [
+    "https://i.ibb.co/GcVJtkh/nina.png",
+    "https://i.ibb.co/YQzKjGx/avatar-contratista-mujer.png",
+    "https://i.ibb.co/Ht7qtCJ/avatar-contratista-mujer-2.png"
+];
+
+// Determinar el género del usuario y asignar avatar una sola vez
+if (!isset($_SESSION['profileImageUrl'])) {
+    function getGender($name) {
+        $url = "https://api.genderize.io?name=" . urlencode($name);
+        $response = file_get_contents($url);
+        $data = json_decode($response, true);
+        return isset($data['gender']) ? $data['gender'] : null;
+    }
+
+    $gender = getGender($perfil['nombre']);
+    if ($gender === 'male') {
+        $randomKey = array_rand($maleAvatars);
+        $_SESSION['profileImageUrl'] = $maleAvatars[$randomKey];
+    } else {
+        $randomKey = array_rand($femaleAvatars);
+        $_SESSION['profileImageUrl'] = $femaleAvatars[$randomKey];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +75,6 @@ if (!isset($_SESSION['idUsuario'])) {
     <link rel="stylesheet" href="../../CSS/perfiles.css">
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.32/dist/sweetalert2.all.min.js"></script>
-
 </head>
 <body>
     <div class="content">
@@ -56,13 +84,8 @@ if (!isset($_SESSION['idUsuario'])) {
                     <div class="card profile-card">
                         <div class="card-body">
                             <div class="text-center mb-4">
-                                <?php if (!empty($perfil['fotoPerfil'])): ?>
-                                    <img src="<?php echo $perfil['fotoPerfil']; ?>" alt="Foto de perfil" 
-                                        class="rounded-circle profile-image mb-3">
-                                <?php else: ?>
-                                    <img src="../../IMG/jaker.png" alt="Foto de perfil por defecto" 
-                                        class="rounded-circle profile-image mb-3">
-                                <?php endif; ?>
+                                <img src="<?php echo $_SESSION['profileImageUrl']; ?>" alt="Foto de perfil" 
+                                     class="rounded-circle profile-image mb-3">
                             </div>
 
                             <h2 class="text-center mb-4">Mi Perfil</h2>
@@ -91,8 +114,8 @@ if (!isset($_SESSION['idUsuario'])) {
                                 <div class="mb-3">
                                     <label for="descripcion" class="form-label fw-bold">Descripción del Perfil:</label>
                                     <textarea class="form-control" id="descripcion" name="descripcion" 
-                                            rows="4" placeholder="Describe tu perfil profesional..."><?php 
-                                            echo htmlspecialchars($perfil['descripcionPerfil'] ?? ''); ?></textarea>
+                                              rows="4" placeholder="Describe tu perfil profesional..."><?php 
+                                              echo htmlspecialchars($perfil['descripcionPerfil'] ?? ''); ?></textarea>
                                 </div>
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-actualizar">
@@ -112,5 +135,5 @@ if (!isset($_SESSION['idUsuario'])) {
 </html>
 
 <?php
-    include '../Menu/footer.php';
+include '../Menu/footer.php';
 ?>
