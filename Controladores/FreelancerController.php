@@ -7,7 +7,6 @@ class FreelancerController {
     public function __construct() {
         $this->freelancerModel = new FreelancerModel();
     }
-
     public function obtenerCategorias() {
         return $this->freelancerModel->obtenerCategorias();
     }
