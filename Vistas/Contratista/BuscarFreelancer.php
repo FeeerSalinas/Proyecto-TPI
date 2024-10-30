@@ -239,7 +239,7 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
                                     <img 
                                         src="<?= $fotoPerfil ?>" 
                                         class="profile-img" 
-                                        alt="<?= htmlspecialchars($freelancer['nombre']) ?>"
+                                        alt=""
                                     >
                                 </div>
                                 <div class="card-content">
