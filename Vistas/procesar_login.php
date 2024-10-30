@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $clave = $_POST['clave'];
     
     $usuarioModel = new UsuarioModel();
-    $resultado = $usuarioModel->login($nombreUsuario, $clave);
+    $resultado = $usuarioModel->login($nombreUsuario, md5($clave));
     
     if (!$resultado) {
         // Si el inicio de sesión falla, redirigir de vuelta al formulario con un mensaje de error
