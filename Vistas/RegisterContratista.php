@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="../CSS/registrarPerfiles.css">
 
 </head>
+
 <body>
     <div class="container-fluid h-100">
         <div class="row h-100">
@@ -17,38 +19,47 @@
                 </div>
 
                 <!-- FORMULARIO QUE SIRVE PARA INSERTAR UN USUARIO -->
-                <form class="custom-form w-50" action="../Controladores/Usuarios/UsuarioController.php?tipo=InsertarContratista" method="POST">
+                <form class="custom-form w-50" action="../Controladores/Usuarios/UsuarioController.php?tipo=InsertarContratista" method="POST" onsubmit="EncriptContrasenia();">
                     <h3 class="text-center text-white mb-4">CREA UNA CUENTA</h3>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Nombre" name="Nombre" id="Nombre">
+                        <input type="text" class="form-control" placeholder="Nombre" name="Nombre" id="Nombre" required>
                     </div>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Correo" name="Correo" id="Correo">
+                        <input type="email" class="form-control" placeholder="Correo" name="Correo" id="Correo" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Usuario" name="Usuario" id="Usuario">
+                        <input type="text" class="form-control" placeholder="Usuario" name="Usuario" id="Usuario" required>
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Contraseña" name="Contrasenia" id="Contrasenia">
+                        <input type="password" class="form-control" placeholder="Contraseña" name="Contrasenia" id="Contrasenia" required onfocus="validarContrasenias();">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                        <input type="password" class="form-control" placeholder="Confirmar contraseña" id="ConfirmarContrasenia" required>
+                        <p id="mensajeError" class="font-weight-bold text-sm text-white bg-danger p-1" style="display:none;">La contraseña no coincide.</p>
                     </div>
                     <div class="mb-3">
-                        <input type="tel" class="form-control" placeholder="Teléfono" name="Telefono" id="Telefono">
+                        <input type="tel" class="form-control" placeholder="Teléfono" name="Telefono" id="Telefono" required>
                     </div>
                     <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Dirección" name="Direccion" id="Direccion">
+                        <input type="text" class="form-control" placeholder="Dirección" name="Direccion" id="Direccion" required>
                     </div>
 
-                    <!-- Encriptar la contra onclick con Javascript"-->
-                    <button type="submit" onclick="EncriptContrasenia();" class="btn btn-primary mb-3">Registrarse</button>
-                    
+                    <button type="submit" class="btn btn-primary mb-3">Registrarse</button>
+
                     <div class="d-flex justify-content-between align-items-center">
                         <span class="text-white">¿Ya tienes una cuenta?</span>
                         <a href="Login.php">Iniciar sesión</a>
                     </div>
                 </form>
+
+                <?php
+                if (isset($_REQUEST['usuarioExiste'])) {
+                    echo '<div class="alert alert-danger position-absolute top-0 start-0 m-3" role="alert">
+                El nombre de usuario <strong>' . htmlspecialchars($_REQUEST['usuarioExiste']) . '</strong> ya existe.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>';
+                }
+                ?>
             </div>
             <div class="seccion2 col-md-6  d-flex align-items-center">
                 <div class="info-section mx-auto w-75">
@@ -65,14 +76,15 @@
             </div>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!--Librería para encriptar la contraseña -->
+    <!--Librería para encriptar la  contraseña -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 
-    <script src="../JS/Functions.js"></script>
+    <script src="../JS/Functions.js" type="module"></script>
 
 
 </body>
+
 </html>
