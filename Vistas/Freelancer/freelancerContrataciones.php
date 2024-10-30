@@ -21,15 +21,17 @@ $idFreelancer = $_SESSION['idUsuario'];
 try {
     // Consultar las contrataciones realizadas al freelancer
     $query = "
-        SELECT 
-            c.idContrato, c.fechaContratacion, c.estado, c.metodo, 
-            s.titulo AS servicio_titulo, s.descripcion AS servicio_descripcion,
-            ct.nombre AS contratista_nombre, ct.correo AS contratista_correo
-        FROM contratacionesf c
-        JOIN servicios s ON c.idServicio = s.idServicio
-        JOIN usuarios ct ON c.idContratista = ct.idUsuario
-        WHERE c.idFreelancer = :idFreelancer
-    ";
+    SELECT 
+        c.idContrato, c.fechaContratacion, c.fechaInicio, c.fechaFin, c.pago, 
+        c.estado, c.metodo, 
+        s.titulo AS servicio_titulo, s.descripcion AS servicio_descripcion,
+        ct.nombre AS contratista_nombre, ct.correo AS contratista_correo
+    FROM contratacionesf c
+    JOIN servicios s ON c.idServicio = s.idServicio
+    JOIN usuarios ct ON c.idContratista = ct.idUsuario
+    WHERE c.idFreelancer = :idFreelancer
+";
+
 
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':idFreelancer', $idFreelancer, PDO::PARAM_INT);
@@ -198,6 +200,18 @@ h1 {
                             <p><strong>Fecha de Contratación:</strong> 
                                 <?= date('d/m/Y', strtotime($contratacion['fechaContratacion'])) ?>
                             </p>
+                            <p><strong>Método de Pago:</strong> <?= htmlspecialchars($contratacion['metodo']) ?></p>
+                            <p><strong>Monto de Pago:</strong> $<?= number_format($contratacion['pago'], 2) ?></p>
+                            <p><strong>Fecha de Inicio:</strong> 
+                                <?= date('d/m/Y', strtotime($contratacion['fechaInicio'])) ?>
+                            </p>
+                            <p><strong>Fecha de Fin:</strong> 
+                                <?= date('d/m/Y', strtotime($contratacion['fechaFin'])) ?>
+                            </p>
+                            <p><strong>Fecha de Contratación:</strong> 
+                                <?= date('d/m/Y', strtotime($contratacion['fechaContratacion'])) ?>
+                            </p>
+                            
                         </div>
 
                         <!-- Mostrar botones solo si el estado es 'Pendiente' -->

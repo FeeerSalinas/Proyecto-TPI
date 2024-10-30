@@ -9,7 +9,7 @@ if (!isset($_SESSION['idUsuario'])) {
 require_once("../../Modelos/UsuarioModel.php");
 include '../Menu/header.php';   
 include '../Menu/navbarFreelancer.php';   
-include '../Menu/sidebar.php'; 
+include '../Menu/sidebarFreelancer.php'; 
 
 
 $usuarioModel = new UsuarioModel();
@@ -96,7 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <img src="<?= htmlspecialchars($perfil['fotoPerfil']) ?>" 
                                      alt="Foto de perfil" class="profile-image">
                             <?php else: ?>
-                                <img src="../../IMG/jaker.png" alt="Foto de perfil por defecto" 
+                                <img src="https://i.ibb.co/fX54vF2/icon.webp" alt="Foto de perfil por defecto" 
                                      class="profile-image">
                             <?php endif; ?>
                         </div>

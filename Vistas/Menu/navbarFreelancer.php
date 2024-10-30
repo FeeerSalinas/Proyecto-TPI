@@ -44,12 +44,11 @@
                 <li class="nav-item"><a class="nav-link" href="perfilFreelancer.php">Mi Perfil</a></li>
             </ul>
 
-            <!-- Avatar con Menú Desplegable -->
-            <img 
-                src="<?= isset($_SESSION['profileImageUrl']) ? $_SESSION['profileImageUrl'] : '../../IMG/user.png'; ?>" 
+            <!-- Avatar -->
+             <img 
+                src="<?= $_SESSION['profileImageUrl'] ?? 'https://i.ibb.co/fX54vF2/icon.webp'; ?>" 
                 alt="Usuario" 
-                class="rounded-circle perfil-img" 
-                height="40"
+                class="perfil-img"
             >
             <span class="nombre-usuario ms-3 text-dark">
                 <?= htmlspecialchars($_SESSION['nombreUsuario']) ?>
