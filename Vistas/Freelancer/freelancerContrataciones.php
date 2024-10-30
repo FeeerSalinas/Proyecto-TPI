@@ -208,9 +208,7 @@ h1 {
                             <p><strong>Fecha de Fin:</strong> 
                                 <?= date('d/m/Y', strtotime($contratacion['fechaFin'])) ?>
                             </p>
-                            <p><strong>Fecha de Contratación:</strong> 
-                                <?= date('d/m/Y', strtotime($contratacion['fechaContratacion'])) ?>
-                            </p>
+                            
                             
                         </div>
 
