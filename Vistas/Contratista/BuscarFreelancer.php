@@ -206,7 +206,7 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
 
 <div class="content" id="content">
     <div class="row">
-        <div class="col-10 md-9">
+        <div class="col-10">
             <div class="search-container">
                 <h1 class="text-center mb-4 fw-bold">Encuentra tu Freelancer Ideal</h1>
                 <form method="GET" class="d-flex justify-content-center">
@@ -214,11 +214,11 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
                         <input 
                             type="text" 
                             name="nombre" 
-                            class="form-control search-input" 
+                            class="form-control" 
                             placeholder="Busca por nombre o habilidades..."
                             value="<?= htmlspecialchars($nombre) ?>"
                         >
-                        <button class="btn search-button" type="submit">
+                        <button class="btn btn-primary" type="submit">
                             <i class="fas fa-search me-2"></i>Buscar
                         </button>
                     </div>
@@ -231,24 +231,20 @@ $freelancers = $controller->buscarFreelancers($nombre, $idCategoria);
                         <?php 
                             $fotoPerfil = !empty($freelancer['fotoPerfil']) 
                                 ? $freelancer['fotoPerfil'] 
-                                : '/Proyecto-TPI/IMG/icon.png';
+                                : 'https://i.ibb.co/fX54vF2/icon.webp'; 
                         ?>
                         <div class="col-md-4 col-sm-6 mb-4">
                             <div class="profile-card">
                                 <div class="profile-img-container">
                                     <img 
-                                        src="<?= $fotoPerfil ?>" 
+                                        src="<?= htmlspecialchars($fotoPerfil) ?>" 
                                         class="profile-img" 
-                                        alt=""
+                                        alt="Foto de perfil"
                                     >
                                 </div>
                                 <div class="card-content">
-                                    <h5 class="freelancer-name">
-                                        <?= htmlspecialchars($freelancer['nombre']) ?>
-                                    </h5>
-                                    <p class="freelancer-description">
-                                        <?= htmlspecialchars(substr($freelancer['descripcionPerfil'], 0, 100)) ?>...
-                                    </p>
+                                    <h5><?= htmlspecialchars($freelancer['nombre']) ?></h5>
+                                    <p><?= htmlspecialchars(substr($freelancer['descripcionPerfil'], 0, 100)) ?>...</p>
                                     <a href="perfilFreelancer.php?id=<?= $freelancer['idUsuario'] ?>" 
                                        class="profile-button">
                                         <i class="fas fa-user-circle me-2"></i>Ver Perfil
