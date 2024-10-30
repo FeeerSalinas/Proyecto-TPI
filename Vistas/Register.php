@@ -10,7 +10,7 @@
 <body>
     <div class="container py-4">
         <div class="logo-container">
-            <img src="../IMG/LogoFreelancer-removebg-preview.png" alt="Freeland Connect" class="img-fluid">
+          <a href="Home.php"> <img src="../IMG/LogoFreelancer-removebg-preview.png" alt="Freeland Connect" class="img-fluid"></a> 
         </div>
 
         <h1 class="main-title text-center">¿Cómo quieres registrarte?</h1>
@@ -54,7 +54,7 @@
         </div>
 
         <div class="text-center login-text">
-            <p class="mb-0">¿Ya tienes una cuenta? <a href="#" class="login-link">Iniciar sesión</a></p>
+            <p class="mb-0">¿Ya tienes una cuenta? <a href="Login.php" class="login-link">Iniciar sesión</a></p>
         </div>
     </div>
 

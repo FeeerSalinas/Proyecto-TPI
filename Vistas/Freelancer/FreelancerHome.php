@@ -9,6 +9,9 @@ if (!isset($_SESSION['idUsuario'])) {
 include '../Menu/header.php';
 include '../Menu/navbarFreelancer.php';
 include '../Menu/sidebarFreelancer.php';
+
+
+
 ?>
 
 <head>

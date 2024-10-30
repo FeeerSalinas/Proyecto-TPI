@@ -37,6 +37,7 @@
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
         }
+        
 
         public function getConnectionDB() {
             return $this->db;
